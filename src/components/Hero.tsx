@@ -14,15 +14,16 @@ import {
 import { AuctionABI } from "@buildersdk/sdk";
 import useDebounce from "@/hooks/useDebounce";
 import getNormalizedURI from "@/utils/getNormalizedURI";
+import useSWR from "swr";
 
 export default function Hero() {
   const {
     query: { site },
   } = useRouter();
 
-  const { data: contractInfo } = trpc.token.contract.useQuery({
-    collectionAddress: site as string,
-  });
+  const { data: contractInfo } = useSWR(
+    "https://" + process.env.NEXT_PUBLIC_DEPLOYMENT_URL + "/api/token/" + site
+  );
 
   const enabled = !!contractInfo;
   const { data: auctionInfo } = trpc.auction.currentAuction.useQuery(
