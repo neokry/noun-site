@@ -1,7 +1,5 @@
-import { trpc } from "@/utils/trpc";
 import { BigNumber, utils } from "ethers";
 import Image from "next/image";
-import { useRouter } from "next/router";
 import { Fragment, useState } from "react";
 import { CountdownDisplay } from "./CountdownDisplay";
 import {
@@ -14,36 +12,21 @@ import {
 import { AuctionABI } from "@buildersdk/sdk";
 import useDebounce from "@/hooks/useDebounce";
 import getNormalizedURI from "@/utils/getNormalizedURI";
-import useSWR from "swr";
+import useAuctionInfo from "hooks/fetch/useAuctionInfo";
+import useContractInfo from "hooks/fetch/useContractInfo";
+import useTokenInfo from "hooks/fetch/useTokenInfo";
 
 export default function Hero() {
-  const {
-    query: { site },
-  } = useRouter();
-
-  const { data: contractInfo } = useSWR(
-    "https://" + process.env.NEXT_PUBLIC_DEPLOYMENT_URL + "/api/token/" + site
-  );
-
-  const enabled = !!contractInfo;
-  const { data: auctionInfo } = trpc.auction.currentAuction.useQuery(
-    {
-      auctionAddress: contractInfo?.auction || "",
-    },
-    { enabled }
-  );
+  const { data: contractInfo } = useContractInfo();
+  const { data: auctionInfo } = useAuctionInfo({
+    address: contractInfo?.auction,
+  });
 
   const tokenId = contractInfo
     ? BigNumber.from(contractInfo.total_supply).sub(1).toHexString()
     : "";
 
-  const { data: tokenInfo } = trpc.token.info.useQuery(
-    {
-      collectionAddress: site as string,
-      tokenId,
-    },
-    { enabled }
-  );
+  const { data: tokenInfo } = useTokenInfo({ tokenId });
 
   return (
     <div className="flex items-center mt-16">
