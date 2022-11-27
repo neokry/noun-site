@@ -49,11 +49,11 @@ export const trpc = createTRPCNext<AppRouter>({
       };
     }
 
-    // cache request for 1 day + revalidate once every second
-    const ONE_DAY_IN_SECONDS = 60 * 60 * 24;
+    console.log("adding cache");
+
     return {
       headers: {
-        "cache-control": `s-maxage=1, stale-while-revalidate=${ONE_DAY_IN_SECONDS}`,
+        "Cache-Control": `s-maxage=1, stale-while-revalidate=59`,
       },
     };
   },
