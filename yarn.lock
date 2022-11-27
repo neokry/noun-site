@@ -739,36 +739,6 @@
     "@tanstack/query-core" "4.15.1"
     use-sync-external-store "^1.2.0"
 
-"@tanstack/react-query@^4.16.1":
-  version "4.16.1"
-  resolved "https://registry.yarnpkg.com/@tanstack/react-query/-/react-query-4.16.1.tgz#077006b8eb2c87fbe8d1597c1a0083a2d218b791"
-  integrity sha512-PDE9u49wSDykPazlCoLFevUpceLjQ0Mm8i6038HgtTEKb/aoVnUZdlUP7C392ds3Cd75+EGlHU7qpEX06R7d9Q==
-  dependencies:
-    "@tanstack/query-core" "4.15.1"
-    use-sync-external-store "^1.2.0"
-
-"@trpc/client@^10.2.0":
-  version "10.2.0"
-  resolved "https://registry.yarnpkg.com/@trpc/client/-/client-10.2.0.tgz#310752768c7d2a1129a91689b233a62bcf87762e"
-  integrity sha512-Mehf6euqMzAak+Umay1LKol9nC716yBjHNqrF6blWY/n2hwSICrLXQwveNaHK7qjKXJ86b4aDW39KR02WCQP4A==
-
-"@trpc/next@^10.2.0":
-  version "10.2.0"
-  resolved "https://registry.yarnpkg.com/@trpc/next/-/next-10.2.0.tgz#b7989e76d4747937f9f38cd643cf943ef5e88afa"
-  integrity sha512-1zbZb9Xd6nYVZfgb6zNA6fLzZ5CWZjd7KYSUIWY0Bh7cVjDAmAtIj2wC3wcXWI7UsKntLIpvUB4XMEsFK/RxiQ==
-  dependencies:
-    react-ssr-prepass "^1.5.0"
-
-"@trpc/react-query@^10.2.0":
-  version "10.2.0"
-  resolved "https://registry.yarnpkg.com/@trpc/react-query/-/react-query-10.2.0.tgz#0c376586bc4baa31d6d3fe38fed2b61dd0a6c8ef"
-  integrity sha512-OH1T1VztPp9qG66cvxPd/Sr9pPsDn+nFmgWtpJmoiTgZJ2DnUPsdi9DVkXdaE9M2OwdoXhFqwboclPzaUAD22g==
-
-"@trpc/server@^10.2.0":
-  version "10.2.0"
-  resolved "https://registry.yarnpkg.com/@trpc/server/-/server-10.2.0.tgz#7716329ab9de742c0d604bc48759e4d1f1434225"
-  integrity sha512-WGOA2bk6JOnOywUu1gkAgwqnxZ5g+vNkL9EpCGLgKYwwMcjAwgNRgYzLPsDsR1XL48wmdYOzfWzJ0G575+g/jA==
-
 "@types/bn.js@^4.11.3":
   version "4.11.6"
   resolved "https://registry.yarnpkg.com/@types/bn.js/-/bn.js-4.11.6.tgz#c306c70d9358aaea33cd4eda092a742b9505967c"
@@ -3854,11 +3824,6 @@ react-remove-scroll@2.5.4:
     use-callback-ref "^1.3.0"
     use-sidecar "^1.1.2"
 
-react-ssr-prepass@^1.5.0:
-  version "1.5.0"
-  resolved "https://registry.yarnpkg.com/react-ssr-prepass/-/react-ssr-prepass-1.5.0.tgz#bc4ca7fcb52365e6aea11cc254a3d1bdcbd030c5"
-  integrity sha512-yFNHrlVEReVYKsLI5lF05tZoHveA5pGzjFbFJY/3pOqqjGOmMmqx83N4hIjN2n6E1AOa+eQEUxs3CgRnPmT0RQ==
-
 react-style-singleton@^2.2.1:
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/react-style-singleton/-/react-style-singleton-2.2.1.tgz#f99e420492b2d8f34d38308ff660b60d0b1205b4"
@@ -4670,11 +4635,6 @@ yocto-queue@^0.1.0:
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/yocto-queue/-/yocto-queue-0.1.0.tgz#0294eb3dee05028d31ee1a5fa2c556a6aaf10a1b"
   integrity sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==
-
-zod@^3.19.1:
-  version "3.19.1"
-  resolved "https://registry.yarnpkg.com/zod/-/zod-3.19.1.tgz#112f074a97b50bfc4772d4ad1576814bd8ac4473"
-  integrity sha512-LYjZsEDhCdYET9ikFu6dVPGp2YH9DegXjdJToSzD9rO6fy4qiRYFoyEYwps88OseJlPyl2NOe2iJuhEhL7IpEA==
 
 zustand@^4.1.4:
   version "4.1.4"
