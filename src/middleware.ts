@@ -17,7 +17,7 @@ export default function middleware(req: NextRequest) {
 
   const currentHost =
     process.env.NODE_ENV === "production" && process.env.VERCEL === "1"
-      ? hostname.replace(`.builer-site.vercel.app`, "")
+      ? hostname.replace(`.nounsite.wtf`, "")
       : hostname.replace(`.localhost:3000`, "");
 
   // rewrites for app pages
