@@ -48,10 +48,13 @@ export const trpc = createTRPCNext<AppRouter>({
         status: clientErrors[0].data?.httpStatus ?? 500,
       };
     }
-    // cache full page for 1 day + revalidate once every minute
+
+    // cache request for 1 day + revalidate once every second
     const ONE_DAY_IN_SECONDS = 60 * 60 * 24;
     return {
-      "Cache-Control": `s-maxage=60, stale-while-revalidate=${ONE_DAY_IN_SECONDS}`,
+      headers: {
+        "cache-control": `s-maxage=1, stale-while-revalidate=${ONE_DAY_IN_SECONDS}`,
+      },
     };
   },
 });
