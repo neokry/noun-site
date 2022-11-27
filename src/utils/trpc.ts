@@ -3,9 +3,9 @@ import { createTRPCNext } from "@trpc/next";
 import type { AppRouter } from "../server/routers/_app";
 
 function getBaseUrl() {
-  if (process.env.VERCEL_URL)
+  if (process.env.NEXT_PUBLIC_VERCEL_URL)
     // reference for vercel.com
-    return `https://${process.env.VERCEL_URL}`;
+    return `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`;
 
   if (process.env.RENDER_INTERNAL_HOSTNAME)
     // reference for render.com
