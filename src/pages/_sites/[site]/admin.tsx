@@ -21,22 +21,16 @@ export default function Admin() {
   const content = () => {
     if (!address) {
       return (
-        <div>
-          <Header />
-          <div className="w-full h-[60vh] text-xl font-semibold text-gray-500 flex items-center justify-around">
-            <div>Connect your wallet to continue</div>
-          </div>
+        <div className="w-full h-[60vh] text-xl font-semibold text-gray-500 flex items-center justify-around">
+          <div>Connect your wallet to continue</div>
         </div>
       );
     }
 
     if (!compareAddress(founder?.wallet, address)) {
       return (
-        <div>
-          <Header />
-          <div className="w-full h-[60vh] text-xl font-semibold text-gray-500 flex items-center justify-around">
-            <div>Unauthorized</div>
-          </div>
+        <div className="w-full h-[60vh] text-xl font-semibold text-gray-500 flex items-center justify-around">
+          <div>Unauthorized</div>
         </div>
       );
     }
