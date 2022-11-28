@@ -18,6 +18,8 @@ export default function Admin() {
 
   if (!isMounted || !founder?.wallet) return <Fragment />;
 
+  const isFounder = address ? compareAddress(founder?.wallet, address) : false;
+
   const content = () => {
     if (!address) {
       return (
@@ -27,7 +29,7 @@ export default function Admin() {
       );
     }
 
-    if (!compareAddress(founder?.wallet, address)) {
+    if (!isFounder) {
       return (
         <div className="w-full h-[60vh] text-xl font-semibold text-gray-500 flex items-center justify-around">
           <div>Unauthorized</div>
@@ -47,13 +49,13 @@ export default function Admin() {
 
   return (
     <MetadataContext.Provider>
-      <Header />
+      <Header isFounder={isFounder} />
       {content()}
     </MetadataContext.Provider>
   );
 }
 
-const Header = () => {
+const Header = ({ isFounder }: { isFounder: boolean }) => {
   const { data: contract } = useContractInfo();
   const { address } = useAccount();
   const { save, loading } = MetadataContext.useContainer();
@@ -68,7 +70,7 @@ const Header = () => {
         <div className={address ? "mr-6" : ""}>
           <ConnectButton showBalance={false} chainStatus={"none"} />
         </div>
-        {address && (
+        {isFounder && (
           <button
             onClick={() => save()}
             className="h-9 w-20 bg-black text-white rounded-md flex items-center justify-around"
