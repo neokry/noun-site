@@ -21,6 +21,7 @@ const upsert = async (req: NextApiRequest, res: NextApiResponse) => {
     create: { description, contract: address as string },
   });
 
+  res.revalidate(`/_sites/${address}`);
   return res.send(result);
 };
 
