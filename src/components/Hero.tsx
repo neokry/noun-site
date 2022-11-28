@@ -30,37 +30,37 @@ export default function Hero() {
   const { data: tokenInfo } = useTokenInfo({ tokenId });
 
   return (
-    <div className="flex items-center mt-16">
-      <div className="pr-12 w-1/2 flex justify-end">
+    <div className="flex flex-col sm:flex-row items-center mt-0 sm:mt-16">
+      <div className="sm:pr-12 sm:w-1/2 flex justify-end">
         {tokenInfo && (
           <Image
             src={tokenInfo.image}
             height={500}
             width={500}
             alt="logo"
-            className="rounded-md"
+            className="sm:rounded-md"
           />
         )}
       </div>
 
-      <div className="w-auto">
+      <div className="w-auto mt-8 px-4">
         {tokenInfo && (
-          <div className="text-6xl font-bold">{tokenInfo.name}</div>
+          <div className="text-4xl sm:text-6xl font-bold">{tokenInfo.name}</div>
         )}
 
-        <div className="grid grid-cols-2 gap-12 mt-10 w-96">
+        <div className="grid grid-cols-2 gap-12 mt-10 sm:w-96">
           <div className="border-r">
             <div className="text-xl text-gray-400">Current Bid</div>
             {auctionInfo && (
-              <div className="text-3xl">
+              <div className="text-2xl sm:text-3xl">
                 Ξ {utils.formatEther(auctionInfo.highestBid || "0")}
               </div>
             )}
           </div>
-          <div className="w-64">
+          <div className="sm:w-64">
             <div className="text-xl text-gray-400">Auction ends in</div>
             {auctionInfo && (
-              <div className="text-3xl">
+              <div className="text-2xl sm:text-3xl">
                 <CountdownDisplay to={auctionInfo.endTime || "0"} />
               </div>
             )}
@@ -195,7 +195,7 @@ const PlaceBid = ({
 
   return (
     <Fragment>
-      <div className="mt-6 flex">
+      <div className="mt-12 sm:mt-6 flex flex-col sm:flex-row">
         <input
           value={bid}
           type="number"
@@ -213,7 +213,7 @@ const PlaceBid = ({
           }}
           className={`${
             write ? "bg-black" : "bg-gray-700"
-          } rounded-lg text-xl text-white w-40 flex items-center justify-around`}
+          } rounded-lg text-xl text-white w-full sm:h-auto h-12 mt-4 sm:mt-0 sm:w-40 flex items-center justify-around`}
         >
           {isLoading ? (
             <Image src="/spinner.svg" height={24} width={24} alt="spinner" />

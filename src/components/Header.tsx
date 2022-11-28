@@ -6,7 +6,7 @@ export default function Header() {
   const { data: contractInfo } = useContractInfo();
 
   return (
-    <div className="flex items-center justify-between px-24 py-4">
+    <div className="flex items-center justify-between px-6 sm:px-24 py-4">
       <div className="flex items-center">
         {contractInfo?.image && (
           <Image

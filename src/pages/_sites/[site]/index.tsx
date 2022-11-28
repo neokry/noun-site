@@ -104,7 +104,7 @@ export default function SiteComponent({
       <Header />
       <Hero />
       {site?.description && (
-        <div className="px-32 mt-20">
+        <div className="px-2 sm:px-32 mt-20">
           <Description html={site.description} />
         </div>
       )}
