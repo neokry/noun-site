@@ -42,11 +42,13 @@ export const getStaticProps = async (
 > => {
   const { site } = context.params!;
 
-  const result = await prisma.site.findFirst({
-    where: { contract: site as string },
-  });
+  const [siteInfo, contract] = await Promise.all([
+    prisma.site.findFirst({
+      where: { contract: site as string },
+    }),
+    getContractInfo({ address: site }),
+  ]);
 
-  const contract = await getContractInfo({ address: site });
   const tokenId = parseInt(contract.total_supply) - 1;
   const [token, auction] = await Promise.all([
     getTokenInfo({
@@ -56,11 +58,11 @@ export const getStaticProps = async (
     getCurrentAuction({ address: contract.auction }),
   ]);
 
-  if (result) {
-    result.description = result?.description
+  if (siteInfo) {
+    siteInfo.description = siteInfo?.description
       ? await remark()
           .use(html)
-          .process(result?.description)
+          .process(siteInfo?.description)
           .then((x) => x.toString())
       : null;
   }
@@ -68,7 +70,7 @@ export const getStaticProps = async (
   return {
     props: {
       tokenId,
-      site: result ? JSON.parse(JSON.stringify(result)) : null,
+      site: siteInfo ? JSON.parse(JSON.stringify(siteInfo)) : null,
       contract,
       token,
       auction,
