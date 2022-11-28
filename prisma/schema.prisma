@@ -1,0 +1,20 @@
+datasource db {
+  provider             = "mysql"
+  url                  = env("DATABASE_URL")
+  referentialIntegrity = "prisma"
+}
+
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["referentialIntegrity"]
+}
+
+model Site {
+  id            String  @id @default(cuid())
+  contract      String @unique
+  subdomain     String? @unique
+  customDomain  String? @unique
+  description   String? @db.Text
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
+}

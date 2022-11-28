@@ -1,6 +1,6 @@
 import useAPIBaseURL from "hooks/useAPIBaseURL";
 import { useRouter } from "next/router";
-import { ContractInfo } from "pages/api/token/[address]";
+import { ContractInfo } from "@/services/nouns-builder/token";
 import useSWR from "swr";
 
 const useContractInfo = () => {
@@ -8,7 +8,9 @@ const useContractInfo = () => {
     query: { site },
   } = useRouter();
   const baseURL = useAPIBaseURL();
-  return useSWR<ContractInfo>(`${baseURL}/api/token/${site}`);
+  return useSWR<ContractInfo>(
+    site ? `${baseURL}/api/token/${site}` : undefined
+  );
 };
 
 export default useContractInfo;

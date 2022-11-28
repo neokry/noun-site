@@ -1,4 +1,4 @@
-import { BigNumber, utils } from "ethers";
+import { BigNumber, ethers, utils } from "ethers";
 import Image from "next/image";
 import { Fragment, useState } from "react";
 import { CountdownDisplay } from "./CountdownDisplay";
@@ -15,6 +15,7 @@ import getNormalizedURI from "@/utils/getNormalizedURI";
 import useAuctionInfo from "hooks/fetch/useAuctionInfo";
 import useContractInfo from "hooks/fetch/useContractInfo";
 import useTokenInfo from "hooks/fetch/useTokenInfo";
+import { compareAddress } from "@/utils/compareAddress";
 
 export default function Hero() {
   const { data: contractInfo } = useContractInfo();
@@ -46,7 +47,7 @@ export default function Hero() {
             <div className="text-xl text-gray-400">Current Bid</div>
             {auctionInfo && (
               <div className="text-3xl">
-                Ξ {utils.formatEther(auctionInfo.highestBid)}
+                Ξ {utils.formatEther(auctionInfo.highestBid || "0")}
               </div>
             )}
           </div>
@@ -54,23 +55,60 @@ export default function Hero() {
             <div className="text-xl text-gray-400">Auction ends in</div>
             {auctionInfo && (
               <div className="text-3xl">
-                <CountdownDisplay to={auctionInfo.endTime} />
+                <CountdownDisplay to={auctionInfo.endTime || "0"} />
               </div>
             )}
           </div>
         </div>
 
-        <PlaceBid
-          highestBid={auctionInfo?.highestBid}
-          auction={contractInfo?.auction}
-          tokenId={tokenId}
-        />
+        {(auctionInfo?.endTime || 0) < Math.round(Date.now() / 1000) ? (
+          <SettleAuction auction={contractInfo?.auction} />
+        ) : (
+          <PlaceBid
+            highestBid={auctionInfo?.highestBid || "0"}
+            auction={contractInfo?.auction}
+            tokenId={tokenId}
+          />
+        )}
 
-        <HighestBidder address={auctionInfo?.highestBidder} />
+        {auctionInfo?.highestBidder &&
+          !compareAddress(
+            auctionInfo?.highestBidder,
+            ethers.constants.AddressZero
+          ) && <HighestBidder address={auctionInfo?.highestBidder} />}
       </div>
     </div>
   );
 }
+
+const SettleAuction = ({ auction }: { auction?: string }) => {
+  const { config } = usePrepareContractWrite({
+    address: auction,
+    abi: AuctionABI,
+    functionName: "settleCurrentAndCreateNewAuction",
+    enabled: !!auction,
+  });
+  const { write, data, isLoading: contractLoading } = useContractWrite(config);
+  const { isLoading: transactionLoading } = useWaitForTransaction({
+    hash: data?.hash,
+  });
+
+  console.log("auction", auction);
+  const isLoading = contractLoading || transactionLoading;
+
+  return (
+    <button
+      onClick={() => write?.()}
+      className="w-full bg-black h-12 text-white mt-6 rounded-md flex items-center justify-around"
+    >
+      {isLoading ? (
+        <Image src="/spinner.svg" height={26} width={26} alt="spinner" />
+      ) : (
+        <span>Settle Auction</span>
+      )}
+    </button>
+  );
+};
 
 const HighestBidder = ({ address }: { address?: `0x${string}` }) => {
   const { data: ensName } = useEnsName({ address });
@@ -119,7 +157,7 @@ const PlaceBid = ({
   const debouncedBid = useDebounce(bid, 500);
 
   const { config, error } = usePrepareContractWrite({
-    address: "0x73924Aa28f23256D994E20803a6C63d9dd056d7d",
+    address: auction,
     abi: AuctionABI,
     functionName: "createBid",
     args: [BigNumber.from(tokenId || 1)],
@@ -129,34 +167,60 @@ const PlaceBid = ({
     enabled: !!auction && !!debouncedBid,
   });
   const { write, data } = useContractWrite(config);
-  const { isLoading, isSuccess } = useWaitForTransaction({
+  const { isLoading } = useWaitForTransaction({
     hash: data?.hash,
   });
 
-  console.log("error", error);
+  const highestBidBN = BigNumber.from(highestBid);
+  const amountIncrease = highestBidBN.div("10");
+  const nextBidAmount = highestBidBN.add(amountIncrease);
+
+  const getError = () => {
+    if (!error?.message) return;
+    const message = error?.message;
+    console.log("error", message);
+
+    if (message.includes("insufficient funds"))
+      return "Error insufficent funds for bid";
+
+    if (debouncedBid && debouncedBid < utils.formatEther(nextBidAmount))
+      return "Error invalid bid";
+  };
 
   return (
-    <div className="mt-6 flex">
-      <input
-        value={bid}
-        onChange={(e) => setBid(e.target.value)}
-        className="bg-gray-100 px-3 py-3 rounded-lg w-full text-2xl mr-2 focus:outline-none"
-        placeholder={
-          highestBid ? `Ξ ${utils.formatEther(highestBid)} or more` : ""
-        }
-      />
-      <button
-        disabled={!write}
-        onClick={(e) => {
-          e.preventDefault();
-          write?.();
-        }}
-        className={`${
-          write ? "bg-black" : "bg-gray-700"
-        } rounded-lg text-xl text-white w-40`}
-      >
-        {isLoading ? "Placing bid..." : "Place bid"}
-      </button>
-    </div>
+    <Fragment>
+      <div className="mt-6 flex">
+        <input
+          value={bid}
+          type="number"
+          onChange={(e) => setBid(e.target.value)}
+          className="bg-gray-100 px-3 py-3 rounded-lg w-full text-2xl mr-2 focus:outline-none"
+          placeholder={
+            nextBidAmount ? `Ξ ${utils.formatEther(nextBidAmount)} or more` : ""
+          }
+        />
+        <button
+          disabled={!write}
+          onClick={(e) => {
+            e.preventDefault();
+            write?.();
+          }}
+          className={`${
+            write ? "bg-black" : "bg-gray-700"
+          } rounded-lg text-xl text-white w-40 flex items-center justify-around`}
+        >
+          {isLoading ? (
+            <Image src="/spinner.svg" height={24} width={24} alt="spinner" />
+          ) : (
+            <span>Place bid</span>
+          )}
+        </button>
+      </div>
+      {error && (
+        <p className="w-96 h-auto break-words text-center mt-5 text-red-500">
+          {getError()}
+        </p>
+      )}
+    </Fragment>
   );
 };

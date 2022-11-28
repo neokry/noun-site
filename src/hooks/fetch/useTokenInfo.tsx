@@ -1,6 +1,6 @@
 import useAPIBaseURL from "hooks/useAPIBaseURL";
 import { useRouter } from "next/router";
-import { ContractInfo } from "pages/api/token/[address]";
+import { TokenInfo } from "@/services/nouns-builder/token";
 import useSWR from "swr";
 
 const useTokenInfo = ({ tokenId }: { tokenId?: string }) => {
@@ -8,8 +8,8 @@ const useTokenInfo = ({ tokenId }: { tokenId?: string }) => {
     query: { site },
   } = useRouter();
   const baseURL = useAPIBaseURL();
-  return useSWR<ContractInfo>(
-    tokenId ? `${baseURL}/api/token/${site}/${tokenId}` : undefined
+  return useSWR<TokenInfo>(
+    tokenId && site ? `${baseURL}/api/token/${site}/${tokenId}` : undefined
   );
 };
 

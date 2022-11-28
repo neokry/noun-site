@@ -1,16 +1,6 @@
-import { BuilderSDK } from "@buildersdk/sdk";
 import { NextApiRequest, NextApiResponse } from "next";
-import DefaultProvider from "@/utils/DefaultProvider";
-import { BigNumber } from "ethers";
-import parseBase64String from "@/utils/parseBase64String";
 import NextCors from "nextjs-cors";
-
-const { token } = BuilderSDK.connect({ signerOrProvider: DefaultProvider });
-
-export type TokenInfo = {
-  name: string;
-  image: string;
-};
+import { getTokenInfo } from "services/nouns-builder/token";
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   await NextCors(req, res, {
@@ -21,12 +11,10 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   });
 
   const { address, tokenid } = req.query;
-  const tokenContract = token({
+  const tokenInfo = await getTokenInfo({
     address: address as string,
+    tokenid: tokenid as string,
   });
-
-  const tokenURI = await tokenContract.tokenURI(BigNumber.from(tokenid));
-  const tokenInfo = parseBase64String(tokenURI) as TokenInfo;
 
   const ONE_DAY_IN_SECONDS = 60 * 60 * 24;
   res.setHeader(

@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import NextCors from "nextjs-cors";
-import { getContractInfo } from "services/nouns-builder/token";
+import { getFounder } from "services/nouns-builder/token";
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   await NextCors(req, res, {
@@ -11,14 +11,18 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   });
 
   const { address } = req.query;
-  const contractInfo = await getContractInfo({ address: address as string });
+
+  const founder = await getFounder({
+    address: address as string,
+    founderId: "0",
+  });
 
   const ONE_DAY_IN_SECONDS = 60 * 60 * 24;
   res.setHeader(
     "Cache-Control",
     `s-maxage=60, stale-while-revalidate=${ONE_DAY_IN_SECONDS}`
   );
-  res.send(contractInfo);
+  res.send(founder);
 };
 
 export default handler;
