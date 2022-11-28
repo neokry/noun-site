@@ -33,7 +33,13 @@ export default function Hero() {
     <div className="flex items-center mt-16">
       <div className="pr-12 w-1/2 flex justify-end">
         {tokenInfo && (
-          <Image src={tokenInfo.image} height={500} width={500} alt="logo" />
+          <Image
+            src={tokenInfo.image}
+            height={500}
+            width={500}
+            alt="logo"
+            className="rounded-md"
+          />
         )}
       </div>
 

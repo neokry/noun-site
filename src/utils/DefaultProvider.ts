@@ -1,7 +1,8 @@
-import { ethers } from "ethers";
+import { providers } from "ethers";
 
-const provider = ethers.getDefaultProvider("mainnet", {
-  alchemy: process.env.NEXT_PUBLIC_ALCHEMY_KEY,
-});
+const provider = new providers.AlchemyProvider(
+  "mainnet",
+  process.env.NEXT_PUBLIC_ALCHEMY_KEY
+);
 
 export default provider;
