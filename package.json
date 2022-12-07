@@ -10,6 +10,8 @@
   },
   "dependencies": {
     "@buildersdk/sdk": "^0.0.4",
+    "@headlessui/react": "^1.7.4",
+    "@heroicons/react": "^2.0.13",
     "@rainbow-me/rainbowkit": "^0.8.0",
     "@types/node": "18.11.9",
     "@types/react": "18.0.25",

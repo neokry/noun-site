@@ -5,6 +5,7 @@ import {
   usePrepareContractWrite,
   useContractWrite,
   useWaitForTransaction,
+  useAccount,
 } from "wagmi";
 import { AuctionABI } from "@buildersdk/sdk";
 import useDebounce from "@/hooks/useDebounce";
@@ -18,6 +19,7 @@ export const PlaceBid = ({
   auction?: string;
   tokenId?: string;
 }) => {
+  const { address } = useAccount();
   const [bid, setBid] = useState("");
   const debouncedBid = useDebounce(bid, 500);
 
@@ -73,9 +75,11 @@ export const PlaceBid = ({
             write?.();
           }}
           className={`bg-skin-button-accent ${
-            write
-              ? "transition ease-in-out hover:scale-110"
-              : "hover:bg-skin-button-accent-hover"
+            address
+              ? write
+                ? "bg-skin-button-accent transition ease-in-out hover:scale-110"
+                : "bg-skin-button-accent hover:bg-skin-button-accent-hover"
+              : "bg-skin-button-muted"
           } text-skin-inverted rounded-lg text-xl w-full sm:h-auto h-12 mt-4 sm:mt-0 sm:w-40 flex items-center justify-around`}
         >
           {isLoading ? (

@@ -1,8 +1,8 @@
 import { ThemeConfig } from "types/ThemeConfig";
-import { darkColors } from "./colors/dark";
+import { lightColors } from "./colors/light";
 
 export const defaultTheme: ThemeConfig = {
-  styles: { color: darkColors },
+  styles: { color: lightColors },
   strings: {},
   brand: {},
   nav: {

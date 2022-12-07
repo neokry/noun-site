@@ -1,7 +1,7 @@
 import { BigNumber, ethers, utils } from "ethers";
 import Image from "next/image";
 import { CountdownDisplay } from "../CountdownDisplay";
-import useAuctionInfo from "hooks/fetch/useAuctionInfo";
+import useAuctionInfo from "@/hooks/fetch/useCurrentAuctionInfo";
 import useContractInfo from "hooks/fetch/useContractInfo";
 import useTokenInfo from "hooks/fetch/useTokenInfo";
 import { compareAddress } from "@/utils/compareAddress";

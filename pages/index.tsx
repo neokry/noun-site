@@ -16,6 +16,7 @@ import { AuctionInfo, getCurrentAuction } from "data/nouns-builder/auction";
 import { promises as fs } from "fs";
 import path from "path";
 import Footer from "@/components/Footer";
+import FaqElement from "@/components/FaqElement";
 
 export const getStaticProps = async (): Promise<
   GetStaticPropsResult<{
@@ -25,8 +26,10 @@ export const getStaticProps = async (): Promise<
     token: TokenInfo;
     auction: AuctionInfo;
     descriptionSource: MDXRemoteSerializeResult<Record<string, unknown>>;
+    faqSources: MDXRemoteSerializeResult<Record<string, unknown>>[];
   }>
 > => {
+  // Get token and auction info
   const tokenContract = process.env.NEXT_PUBLIC_TOKEN_CONTRACT!;
 
   const contract = await getContractInfo({ address: tokenContract });
@@ -40,12 +43,31 @@ export const getStaticProps = async (): Promise<
     getCurrentAuction({ address: contract.auction }),
   ]);
 
+  // Get description and faq markdown
+
   const templateDirectory = path.join(process.cwd(), "templates");
-  const source = await fs.readFile(
-    templateDirectory + "/home/description.mdx",
+  const descFile = await fs.readFile(
+    templateDirectory + "/home/description.md",
     "utf8"
   );
-  const mdxSource = await serialize(source);
+  const descMD = await serialize(descFile);
+
+  const faqFiles = await fs.readdir(templateDirectory + "/home/faq");
+  const faqSources = await Promise.all(
+    faqFiles.map(async (file) => {
+      const faqFile = await fs.readFile(
+        templateDirectory + "/home/faq/" + file,
+        "utf8"
+      );
+
+      return serialize(faqFile, { parseFrontmatter: true });
+    })
+  ).then((x) =>
+    x.sort(
+      (a, b) =>
+        Number(a.frontmatter?.order || 0) - Number(b.frontmatter?.order || 0)
+    )
+  );
 
   return {
     props: {
@@ -54,7 +76,8 @@ export const getStaticProps = async (): Promise<
       contract,
       token,
       auction,
-      descriptionSource: mdxSource,
+      descriptionSource: descMD,
+      faqSources,
     },
     revalidate: 60,
   };
@@ -67,10 +90,13 @@ export default function SiteComponent({
   token,
   auction,
   descriptionSource,
+  faqSources,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   const isMounted = useIsMounted();
 
   if (!isMounted) return <Fragment />;
+
+  console.log("faqSources", faqSources);
 
   return (
     <SWRConfig
@@ -87,9 +113,26 @@ export default function SiteComponent({
         <Hero />
       </div>
 
-      <div className="bg-skin-backdrop">
-        <div className="h-full w-full wrapper focus:outline-none pt-12 p-6 px-52 prose prose-skin lg:prose-xl max-w-none">
+      <div className="bg-skin-backdrop px-52">
+        <div className="h-full w-full wrapper focus:outline-none pt-12 p-6 prose prose-skin lg:prose-xl max-w-none">
           <MDXRemote {...descriptionSource} />
+        </div>
+
+        <div className="pt-12 p-8 ">
+          {faqSources.map((x, i) => (
+            <div key={i} className="mb-10">
+              <FaqElement
+                className={
+                  "flex items-center justify-between w-full text-4xl font-bold text-skin-base"
+                }
+                title={x.frontmatter?.title || ""}
+              >
+                <div className="prose prose-skin max-w-none mt-8">
+                  <MDXRemote {...x} />
+                </div>
+              </FaqElement>
+            </div>
+          ))}
         </div>
 
         <Footer />

@@ -9,6 +9,6 @@ export const lightColors: ThemeColors = {
   "text-muted": "120, 120, 120",
   "text-inverted": "256, 256, 256",
   "button-accent": "5, 5, 5",
-  "button-accent-hover": "238, 242, 255",
-  "button-muted": "80, 80, 80",
+  "button-accent-hover": "60, 60, 60",
+  "button-muted": "100, 100, 100",
 };
