@@ -114,7 +114,7 @@ export default function SiteComponent({
       </div>
 
       <div className="bg-skin-backdrop px-52">
-        <div className="h-full w-full wrapper focus:outline-none pt-12 p-6 prose prose-skin lg:prose-xl max-w-none">
+        <div className="h-full w-full wrapper focus:outline-none pt-12 p-6 prose prose-skin prose-headings:font-heading lg:prose-xl max-w-none">
           <MDXRemote {...descriptionSource} />
         </div>
 
@@ -123,11 +123,11 @@ export default function SiteComponent({
             <div key={i} className="mb-10">
               <FaqElement
                 className={
-                  "flex items-center justify-between w-full text-4xl font-bold text-skin-base"
+                  "flex items-center justify-between w-full text-4xl font-heading text-skin-base"
                 }
                 title={x.frontmatter?.title || ""}
               >
-                <div className="prose prose-skin max-w-none mt-8">
+                <div className="prose prose-skin prose-headings:font-heading max-w-none mt-8">
                   <MDXRemote {...x} />
                 </div>
               </FaqElement>

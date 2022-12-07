@@ -1,11 +1,11 @@
-import { applyThemeColors } from "@/utils/applyThemeColors";
+import { applyThemeProperties } from "@/utils/applyThemeProperties";
 import { useEffect } from "react";
 import { useTheme } from "./useTheme";
 
-export const useInitThemeColors = () => {
+export const useInitTheme = () => {
   const [theme] = useTheme();
 
   useEffect(() => {
-    applyThemeColors(theme);
+    applyThemeProperties(theme);
   }, [theme]);
 };

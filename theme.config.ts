@@ -1,8 +1,13 @@
 import { ThemeConfig } from "types/ThemeConfig";
-import { defaultTheme } from "theme/default";
+import { lightTheme } from "theme/default";
+import merge from "lodash.merge";
 
-export const theme: ThemeConfig = {
-  ...defaultTheme,
+export const theme: ThemeConfig = merge(lightTheme, {
+  styles: {
+    fonts: {
+      heading: "Londrina Solid",
+    },
+  },
   brand: {
     logo: "/builder.svg",
   },
@@ -25,4 +30,4 @@ export const theme: ThemeConfig = {
       { label: "Nouns", href: "https://nouns.wtf/" },
     ],
   },
-};
+} as Partial<ThemeConfig>);

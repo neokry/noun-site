@@ -6,14 +6,14 @@ import { RainbowKitProvider, lightTheme } from "@rainbow-me/rainbowkit";
 import { SWRConfig } from "swr";
 import resolveConfig from "tailwindcss/resolveConfig";
 import tailwindConfig from "../tailwind.config.js";
-import { useInitThemeColors } from "@/hooks/useInitThemeColors";
+import { useInitTheme } from "@/hooks/useInitTheme";
 
 const fullConfig = resolveConfig(tailwindConfig);
 const bg = (fullConfig.theme?.backgroundColor as any).skin;
 const text = (fullConfig.theme?.textColor as any).skin;
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
-  useInitThemeColors();
+  useInitTheme();
 
   return (
     <SWRConfig
@@ -30,7 +30,9 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
             accentColorForeground: text["base"](100),
           })}
         >
-          <Component {...pageProps} />
+          <div className="font-body">
+            <Component {...pageProps} />
+          </div>
         </RainbowKitProvider>
       </WagmiConfig>
     </SWRConfig>

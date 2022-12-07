@@ -1,9 +1,11 @@
 import { NavigationItem } from "./NavigationItem";
 import { ThemeColors } from "./ThemeColors";
+import { ThemeFonts } from "./ThemeFonts";
 
 export type ThemeConfig = {
   styles: {
-    color?: ThemeColors;
+    colors?: ThemeColors;
+    fonts?: ThemeFonts;
   };
   strings: {
     currentBid?: string;

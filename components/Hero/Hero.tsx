@@ -39,7 +39,7 @@ export default function Hero() {
       </div>
       <div className="w-auto mt-8 px-4">
         {tokenInfo && (
-          <div className="text-4xl sm:text-6xl font-bold text-skin-base">
+          <div className="text-4xl sm:text-6xl font-heading text-skin-base">
             {tokenInfo.name}
           </div>
         )}

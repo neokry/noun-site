@@ -1,3 +1,5 @@
+const defaultTheme = require("tailwindcss/defaultTheme");
+
 function withOpacity(variableName) {
   return ({ opacityValue }) => {
     if (opacityValue !== undefined) {
@@ -49,21 +51,22 @@ module.exports = {
           hue: withOpacity("--color-fill"),
         },
       },
-      typography: ({ theme }) => {
-        console.log("theme", theme("colors.skin[muted]"));
-        return {
-          skin: {
-            css: {
-              "--tw-prose-body": theme("colors.skin.muted"),
-              "--tw-prose-headings": theme("colors.skin.base"),
-              "--tw-prose-lead": theme("colors.skin.muted"),
-              "--tw-prose-links": theme("colors.skin.muted"),
-              "--tw-prose-bold": theme("ccolors.skin.muted"),
-              "--tw-prose-counters": theme("colors.skin.muted"),
-            },
-          },
-        };
+      fontFamily: {
+        heading: ["var(--font-heading)", ...defaultTheme.fontFamily.sans],
+        body: ["var(--font-body)", ...defaultTheme.fontFamily.sans],
       },
+      typography: ({ theme }) => ({
+        skin: {
+          css: {
+            "--tw-prose-body": theme("colors.skin.muted"),
+            "--tw-prose-headings": theme("colors.skin.base"),
+            "--tw-prose-lead": theme("colors.skin.muted"),
+            "--tw-prose-links": theme("colors.skin.muted"),
+            "--tw-prose-bold": theme("ccolors.skin.muted"),
+            "--tw-prose-counters": theme("colors.skin.muted"),
+          },
+        },
+      }),
     },
   },
   plugins: [require("@tailwindcss/typography")],
