@@ -9,12 +9,14 @@ import { SettleAuction } from "./SettleAuction";
 import { PlaceBid } from "./PlaceBid";
 import { HighestBidder } from "./HighestBidder";
 import { useState } from "react";
+import { useTheme } from "@/hooks/useTheme";
 
 export default function Hero() {
   const { data: contractInfo } = useContractInfo();
   const { data: auctionInfo } = useAuctionInfo({
     auctionContract: contractInfo?.auction,
   });
+  const [theme] = useTheme();
 
   const tokenId = contractInfo
     ? BigNumber.from(contractInfo.total_supply).sub(1).toHexString()
@@ -46,7 +48,9 @@ export default function Hero() {
 
         <div className="grid grid-cols-2 gap-12 mt-10 sm:w-96">
           <div className="border-r border-skin-stroke">
-            <div className="text-lg text-skin-muted">Current Bid</div>
+            <div className="text-lg text-skin-muted">
+              {theme.strings.currentBid || "Current Bid"}
+            </div>
             {auctionInfo && (
               <div className="text-2xl font-semibold sm:text-3xl text-skin-base mt-2">
                 Ξ {utils.formatEther(auctionInfo.highestBid || "0")}
@@ -54,7 +58,9 @@ export default function Hero() {
             )}
           </div>
           <div className="sm:w-64">
-            <div className="text-lg text-skin-muted">Auction ends in</div>
+            <div className="text-lg text-skin-muted">
+              {theme.strings.auctionEndsIn || "Auction ends in"}
+            </div>
             {auctionInfo && (
               <div className="text-2xl font-semibold sm:text-3xl text-skin-base mt-2">
                 <CountdownDisplay to={auctionInfo.endTime || "0"} />

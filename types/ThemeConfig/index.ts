@@ -13,6 +13,7 @@ export type ThemeConfig = {
     placeBid?: string;
     highestBidder?: string;
     connectWallet?: string;
+    wrongNetwork?: string;
   };
   brand: {
     logo?: string | null;

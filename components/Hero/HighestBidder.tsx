@@ -2,10 +2,12 @@ import Image from "next/image";
 import { Fragment } from "react";
 import { useEnsName, useEnsAvatar } from "wagmi";
 import getNormalizedURI from "@/utils/getNormalizedURI";
+import { useTheme } from "@/hooks/useTheme";
 
 export const HighestBidder = ({ address }: { address?: `0x${string}` }) => {
   const { data: ensName } = useEnsName({ address });
   const { data: ensAvatar } = useEnsAvatar({ address });
+  const [theme] = useTheme();
 
   const len = address?.length || 0;
   const shortAddress = `${address?.slice(0, 5)}...${address?.slice(
@@ -17,7 +19,9 @@ export const HighestBidder = ({ address }: { address?: `0x${string}` }) => {
 
   return (
     <div className="flex items-center justify-between w-full mt-6 border-b border-skin-stroke pb-4">
-      <div className="text-skin-muted">Highest Bidder</div>
+      <div className="text-skin-muted">
+        {theme.strings.highestBidder || "Highest Bidder"}
+      </div>
 
       <div className="flex items-center">
         {ensAvatar && (

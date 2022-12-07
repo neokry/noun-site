@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { ConnectButton } from "@rainbow-me/rainbowkit";
 import useContractInfo from "hooks/fetch/useContractInfo";
 import { useTheme } from "@/hooks/useTheme";
 import NavigationItemsComponent from "./NavigationItem";
@@ -7,6 +6,7 @@ import Link from "next/link";
 import useTreasuryBalance from "@/hooks/fetch/useTreasuryBalance";
 import { utils } from "ethers";
 import { ETHERSCAN_BASEURL } from "constants/urls";
+import CustomConnectButton from "./CustomConnectButton";
 
 export default function Header() {
   const { data: contractInfo } = useContractInfo();
@@ -58,7 +58,7 @@ export default function Header() {
             className="mr-4 border hover:bg-skin-backdrop transition ease-in-out hover:scale-110 font-semibold rounded-xl px-6 h-10 flex items-center justify-around text-skin-muted border-skin-stroke"
           />
         ))}
-        <ConnectButton chainStatus={"none"} showBalance={false} />
+        <CustomConnectButton className="bg-skin-backdrop px-6 h-10 rounded-xl border border-skin-stroke text-skin-base transition ease-in-out hover:scale-110" />
       </div>
     </div>
   );

@@ -9,6 +9,7 @@ import {
 } from "wagmi";
 import { AuctionABI } from "@buildersdk/sdk";
 import useDebounce from "@/hooks/useDebounce";
+import { useTheme } from "@/hooks/useTheme";
 
 export const PlaceBid = ({
   highestBid,
@@ -22,6 +23,7 @@ export const PlaceBid = ({
   const { address } = useAccount();
   const [bid, setBid] = useState("");
   const debouncedBid = useDebounce(bid, 500);
+  const [theme] = useTheme();
 
   const { config, error } = usePrepareContractWrite({
     address: auction,
@@ -85,7 +87,7 @@ export const PlaceBid = ({
           {isLoading ? (
             <Image src="/spinner.svg" height={24} width={24} alt="spinner" />
           ) : (
-            <span>Place bid</span>
+            <span>{theme.strings.placeBid || "Place bid"}</span>
           )}
         </button>
       </div>
