@@ -7,19 +7,19 @@ import { serialize } from "next-mdx-remote/serialize";
 import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote";
 import { promises as fs } from "fs";
 import path from "path";
-import Header from "@/components/Header";
 import Layout from "@/components/Layout";
 
 export const getStaticPaths = async () => {
   const templateDirectory = path.join(process.cwd(), "templates");
-  const files = await fs.readdir(templateDirectory);
-  const paths = files.map((file) => ({
-    params: {
-      slug: file.replace(/\.md?$/, ""),
-    },
-  }));
+  const files = await fs.readdir(templateDirectory, { withFileTypes: true });
+  const paths = files
+    .filter((dirent) => dirent.isFile())
+    .map((file) => ({
+      params: {
+        slug: file.name.replace(/\.md?$/, ""),
+      },
+    }));
 
-  console.log("files", paths);
   return {
     paths,
     fallback: false,

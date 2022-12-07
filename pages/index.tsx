@@ -52,16 +52,20 @@ export const getStaticProps = async (): Promise<
   );
   const descMD = await serialize(descFile);
 
-  const faqFiles = await fs.readdir(templateDirectory + "/home/faq");
+  const faqFiles = await fs.readdir(templateDirectory + "/home/faq", {
+    withFileTypes: true,
+  });
   const faqSources = await Promise.all(
-    faqFiles.map(async (file) => {
-      const faqFile = await fs.readFile(
-        templateDirectory + "/home/faq/" + file,
-        "utf8"
-      );
+    faqFiles
+      .filter((dirent) => dirent.isFile())
+      .map(async (file) => {
+        const faqFile = await fs.readFile(
+          templateDirectory + "/home/faq/" + file.name,
+          "utf8"
+        );
 
-      return serialize(faqFile, { parseFrontmatter: true });
-    })
+        return serialize(faqFile, { parseFrontmatter: true });
+      })
   ).then((x) =>
     x.sort(
       (a, b) =>
