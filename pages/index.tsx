@@ -123,7 +123,7 @@ export default function SiteComponent({
             <div key={i} className="mb-10">
               <FaqElement
                 className={
-                  "flex items-center justify-between w-full text-4xl font-heading text-skin-base"
+                  "flex items-center justify-between w-full text-4xl font-heading text-skin-base hover:text-skin-highlighted"
                 }
                 title={x.frontmatter?.title || ""}
               >

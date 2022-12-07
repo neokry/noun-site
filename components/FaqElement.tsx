@@ -14,12 +14,12 @@ export default function FaqElement({
     <Disclosure>
       {({ open }) => (
         <>
-          <Disclosure.Button className={className}>
-            <div>{title}</div>
+          <Disclosure.Button className={`${className}`}>
+            <div className={open ? "text-skin-highlighted" : ""}>{title}</div>
             <ChevronDownIcon
               className={`${
                 open ? "rotate-180 transform" : ""
-              } h-8 transition ease-in-out`}
+              } h-8 transition ease-in-out text-skin-base`}
             />
           </Disclosure.Button>
 

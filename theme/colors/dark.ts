@@ -8,6 +8,7 @@ export const darkColors: ThemeColors = {
   "text-base": "256, 256, 256",
   "text-muted": "160, 160, 160",
   "text-inverted": "5, 5, 5",
+  "text-highlighted": "256, 256, 256",
   "button-accent": "256, 256, 256",
   "button-accent-hover": "220, 220, 220",
   "button-muted": "220, 220, 220",

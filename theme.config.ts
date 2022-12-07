@@ -7,6 +7,9 @@ export const theme: ThemeConfig = merge(lightTheme, {
     fonts: {
       heading: "Londrina Solid",
     },
+    colors: {
+      "text-highlighted": "0, 133, 255",
+    },
   },
   brand: {
     logo: "/builder.svg",

@@ -8,6 +8,7 @@ export type ThemeColors = {
   "text-base"?: RGBType;
   "text-muted"?: RGBType;
   "text-inverted"?: RGBType;
+  "text-highlighted"?: RGBType;
   "button-accent"?: RGBType;
   "button-accent-hover"?: RGBType;
   "button-muted"?: RGBType;
