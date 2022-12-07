@@ -27,7 +27,7 @@ export default function Hero() {
 
   return (
     <div className="flex flex-col sm:flex-row items-center mt-0 sm:mt-10">
-      <div className="sm:pr-12 sm:w-1/2 flex justify-end">
+      <div className="sm:pr-12 sm:w-1/2 mx-4 flex justify-end">
         {tokenInfo && (
           <Image
             src={tokenInfo.image}

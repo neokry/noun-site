@@ -18,7 +18,7 @@ export const HighestBidder = ({ address }: { address?: `0x${string}` }) => {
   if (!address) return <Fragment />;
 
   return (
-    <div className="flex items-center justify-between w-full mt-6 border-b border-skin-stroke pb-4">
+    <div className="flex items-center justify-between w-full mt-6 sm:border-b border-skin-stroke pb-4">
       <div className="text-skin-muted">
         {theme.strings.highestBidder || "Highest Bidder"}
       </div>
