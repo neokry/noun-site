@@ -113,7 +113,7 @@ export default function SiteComponent({
         <Hero />
       </div>
 
-      <div className="bg-skin-backdrop px-52">
+      <div className="bg-skin-backdrop px-2 sm:px-52">
         <div className="h-full w-full wrapper focus:outline-none pt-12 p-6 prose prose-skin prose-headings:font-heading lg:prose-xl max-w-none">
           <MDXRemote {...descriptionSource} />
         </div>
@@ -123,7 +123,7 @@ export default function SiteComponent({
             <div key={i} className="mb-10">
               <FaqElement
                 className={
-                  "flex items-center justify-between w-full text-4xl font-heading text-skin-base hover:text-skin-highlighted"
+                  "flex items-center justify-between w-full text-left text-4xl font-heading text-skin-base hover:text-skin-highlighted"
                 }
                 title={x.frontmatter?.title || ""}
               >

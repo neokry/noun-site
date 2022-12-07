@@ -6,12 +6,12 @@ export default function Footer() {
 
   return (
     <div className="flex justify-around py-16">
-      <div className="flex items-center">
+      <div className="flex flex-wrap items-center">
         {theme.nav.secondary.map((item, i) => (
           <NavigationItemComponent
             key={i}
             item={item}
-            className="mr-4 rounded-xl px-6 text-md h-10 flex items-center justify-around text-skin-muted hover:text-skin-base"
+            className="mr-0 sm:mr-4 rounded-xl px-4 sm:px-6 text-sm sm:text-md h-10 flex items-center justify-around text-skin-muted hover:text-skin-base"
           />
         ))}
       </div>
