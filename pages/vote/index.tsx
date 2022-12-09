@@ -10,7 +10,6 @@ import path from "path";
 import { GetStaticPropsResult, InferGetStaticPropsType } from "next";
 import { serialize } from "next-mdx-remote/serialize";
 import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote";
-import { utils } from "ethers";
 import { formatTreasuryBalance } from "@/utils/formatTreasuryBalance";
 
 export const getStaticProps = async (): Promise<
@@ -63,11 +62,11 @@ export default function Vote({
       <div className="border border-skin-stroke rounded-2xl py-6 sm:py-0 px-6 mt-6 flex flex-col sm:flex-row sm:items-center justify-between sm:h-32">
         <div className="sm:py-6 h-full">
           <div className="font-heading text-2xl text-skin-muted">Treasury</div>
-          <div className="text-4xl font-heading mt-2">
+          <div className="text-4xl font-heading mt-2 text-skin-base">
             Ξ {treasuryBalance ? formatTreasuryBalance(treasuryBalance) : "0"}
           </div>
         </div>
-        <div className="sm:w-1/3 mt-4 sm:mt-0 sm:border-l sm:pl-6 h-full flex items-center text-skin-muted">
+        <div className="sm:w-1/3 mt-4 sm:mt-0 sm:border-l border-skin-stroke sm:pl-6 h-full flex items-center text-skin-muted">
           This treasury exists for DAO participants to allocate resources for
           the long-term growth and prosperity of the project.
         </div>
@@ -99,7 +98,7 @@ const ProposalPlacard = ({
   return (
     <Link
       href={`/vote/${proposal.proposalId}`}
-      className="flex items-center justify-between w-full bg-skin-fill hover:bg-skin-muted border border-skin-stroke p-4 my-6 rounded-2xl"
+      className="flex items-center justify-between w-full bg-skin-muted hover:bg-skin-backdrop border border-skin-stroke p-4 my-6 rounded-2xl"
     >
       <div className="flex items-center pr-4">
         <div className="text-xl font-semibold text-skin-base">

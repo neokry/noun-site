@@ -7,7 +7,7 @@ import { getProposalName } from "@/utils/getProposalName";
 import ProposalStatus from "@/components/ProposalStatus";
 import Link from "next/link";
 import { ArrowLeftIcon } from "@heroicons/react/20/solid";
-import { useContractRead, useEnsName } from "wagmi";
+import { useEnsName } from "wagmi";
 import { shortenAddress } from "@/utils/shortenAddress";
 import { getProposalDescription } from "@/utils/getProposalDescription";
 import sanitizeHtml from "sanitize-html";
@@ -85,7 +85,7 @@ export default function Proposal() {
       <div className="flex items-baseline">
         <Link
           href="/vote"
-          className="flex items-center border border-skin-stroke rounded-full p-2 mr-4"
+          className="flex items-center border border-skin-stroke hover:bg-skin-muted rounded-full p-2 mr-4"
         >
           <ArrowLeftIcon className="h-4" />
         </Link>
@@ -97,7 +97,7 @@ export default function Proposal() {
             </div>
             <ProposalStatus proposal={proposal} />
           </div>
-          <div className="mt-2 text-5xl font-heading">
+          <div className="mt-2 text-5xl font-heading text-skin-base">
             {getProposalName(proposal.description)}
           </div>
           <div className="mt-4 text-2xl font-heading text-skin-muted">
@@ -110,7 +110,7 @@ export default function Proposal() {
       </div>
 
       <div className="items-center w-full grid grid-cols-3 gap-4 mt-12">
-        <div className="w-full bg-skin-fill border border-skin-stroke rounded-xl p-6">
+        <div className="w-full bg-skin-muted border border-skin-stroke rounded-xl p-6">
           <ProgressBar
             label="For"
             type="success"
@@ -118,7 +118,7 @@ export default function Proposal() {
             percentage={getVotePercentage(forVotes)}
           />
         </div>
-        <div className="w-full bg-skin-fill border border-skin-stroke rounded-xl p-6">
+        <div className="w-full bg-skin-muted border border-skin-stroke rounded-xl p-6">
           <ProgressBar
             label="Against"
             type="danger"
@@ -126,7 +126,7 @@ export default function Proposal() {
             percentage={getVotePercentage(againstVotes)}
           />
         </div>
-        <div className="w-full bg-skin-fill border border-skin-stroke rounded-xl p-6">
+        <div className="w-full bg-skin-muted border border-skin-stroke rounded-xl p-6">
           <ProgressBar
             label="Abstain"
             type="muted"
@@ -168,7 +168,7 @@ export default function Proposal() {
         <div className="text-2xl font-heading text-skin-muted">Description</div>
 
         <div
-          className="prose text-skin-base mt-4 prose-img:w-auto break-words"
+          className="prose prose-skin mt-4 prose-img:w-auto break-words"
           dangerouslySetInnerHTML={{
             __html: sanitizeHtml(getProposalDescription(proposal.description), {
               allowedTags: sanitizeHtml.defaults.allowedTags.concat(["img"]),
@@ -214,7 +214,7 @@ const ProgressBar = ({
       bgColor = "bg-red-100";
       break;
     case "muted":
-      textColor = "text-gray-600";
+      textColor = "text-gray-500";
       baseColor = "bg-gray-600";
       bgColor = "bg-gray-200";
       break;

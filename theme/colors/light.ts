@@ -2,7 +2,7 @@ import { ThemeColors } from "types/ThemeConfig/ThemeColors";
 
 export const lightColors: ThemeColors = {
   fill: "245, 245, 245",
-  muted: "256, 256, 256",
+  muted: "245, 245, 245",
   stroke: "220, 220, 220",
   backdrop: "256, 256, 256",
   "text-base": "5, 5, 5",

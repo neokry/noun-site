@@ -65,7 +65,7 @@ export const PlaceBid = ({
           value={bid}
           type="number"
           onChange={(e) => setBid(e.target.value)}
-          className="bg-skin-muted text-skin-base placeholder:text-skin-muted px-3 py-3 rounded-lg w-full text-2xl mr-2 focus:outline-none"
+          className="bg-skin-backdrop text-skin-base placeholder:text-skin-muted px-3 py-3 rounded-lg w-full text-2xl mr-2 focus:outline-none"
           placeholder={
             nextBidAmount ? `Ξ ${utils.formatEther(nextBidAmount)} or more` : ""
           }
