@@ -19,7 +19,7 @@ export default function ProposalStatus({ proposal }: { proposal: Proposal }) {
       );
     case 2:
       return (
-        <div className="bg-gray-500 text-white p-1 px-2 rounded-md">
+        <div className="bg-gray-400 text-white p-1 px-2 rounded-md">
           Canceled
         </div>
       );
@@ -37,11 +37,11 @@ export default function ProposalStatus({ proposal }: { proposal: Proposal }) {
       );
     case 5:
       return (
-        <div className="bg-gray-500 text-white p-1 px-2 rounded-md">Queued</div>
+        <div className="bg-gray-400 text-white p-1 px-2 rounded-md">Queued</div>
       );
     case 6:
       return (
-        <div className="bg-gray-500 text-white p-1 px-2 rounded-md">
+        <div className="bg-gray-400 text-white p-1 px-2 rounded-md">
           Expired
         </div>
       );

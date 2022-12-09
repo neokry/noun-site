@@ -7,11 +7,17 @@ import { getProposalName } from "@/utils/getProposalName";
 import ProposalStatus from "@/components/ProposalStatus";
 import Link from "next/link";
 import { ArrowLeftIcon } from "@heroicons/react/20/solid";
-import { useEnsName } from "wagmi";
+import { useContractRead, useEnsName } from "wagmi";
 import { shortenAddress } from "@/utils/shortenAddress";
 import { getProposalDescription } from "@/utils/getProposalDescription";
+import sanitizeHtml from "sanitize-html";
+import ModalWrapper from "@/components/ModalWrapper";
+import VoteModal from "@/components/VoteModal";
+import { Fragment, useState } from "react";
+import { useTokenBalance } from "@/hooks/fetch/useTokenBalance";
 
 export default function Proposal() {
+  const [modalOpen, setModalOpen] = useState(false);
   const { data: addresses } = useDAOAddresses({
     tokenContract: TOKEN_CONTRACT,
   });
@@ -28,6 +34,7 @@ export default function Proposal() {
     : 0;
 
   const proposal = proposals?.find((x) => x.proposalId === proposalid);
+  const isActive = proposal?.state === 1;
 
   const { data: ensName } = useEnsName({
     address: proposal?.proposal.proposer,
@@ -61,8 +68,6 @@ export default function Proposal() {
     return `${month} ${date.getDate()}, ${date.getFullYear()}`;
   };
 
-  console.log("proposal", proposal.proposal);
-
   const getTime = (timestamp: number) => {
     const date = new Date(timestamp * 1000);
 
@@ -74,6 +79,9 @@ export default function Proposal() {
 
   return (
     <Layout>
+      <ModalWrapper open={modalOpen} setOpen={setModalOpen}>
+        <VoteModal proposal={proposal} proposalNumber={proposalNumber} />
+      </ModalWrapper>
       <div className="flex items-baseline">
         <Link
           href="/vote"
@@ -81,6 +89,7 @@ export default function Proposal() {
         >
           <ArrowLeftIcon className="h-4" />
         </Link>
+
         <div>
           <div className="flex items-center">
             <div className="font-heading text-2xl text-skin-muted mr-4">
@@ -125,7 +134,10 @@ export default function Proposal() {
             percentage={getVotePercentage(abstainVotes)}
           />
         </div>
-        <div className="w-full border border-skin-stroke rounded-xl p-6 flex justify-between items-baseline">
+      </div>
+
+      <div className="items-center w-full grid gir sm:grid-cols-3 gap-4 mt-4">
+        <div className="w-full border border-skin-stroke rounded-xl p-6 flex justify-between items-center sm:items-baseline">
           <div className="font-heading text-xl text-skin-muted">Threshold</div>
           <div className="text-right">
             <div className="text-skin-muted">Current Threshold</div>
@@ -134,14 +146,16 @@ export default function Proposal() {
             </div>
           </div>
         </div>
-        <div className="w-full border border-skin-stroke rounded-xl p-6 flex justify-between items-baseline">
+
+        <div className="w-full border border-skin-stroke rounded-xl p-6 flex justify-between items-center sm:items-baseline">
           <div className="font-heading text-xl text-skin-muted">Ends</div>
           <div className="text-right">
             <div className="text-skin-muted">{getTime(voteEnd)}</div>
             <div className="font-semibold">{getDate(voteEnd)}</div>
           </div>
         </div>
-        <div className="w-full border border-skin-stroke rounded-xl p-6 flex justify-between items-baseline">
+
+        <div className="w-full border border-skin-stroke rounded-xl p-6 flex justify-between items-center sm:items-baseline">
           <div className="font-heading text-xl text-skin-muted">Snapshot</div>
           <div className="text-right">
             <div className="text-skin-muted">{getTime(voteStart)}</div>
@@ -154,15 +168,24 @@ export default function Proposal() {
         <div className="text-2xl font-heading text-skin-muted">Description</div>
 
         <div
-          className="prose text-skin-base mt-4"
+          className="prose text-skin-base mt-4 prose-img:w-auto break-words"
           dangerouslySetInnerHTML={{
-            __html: getProposalDescription(proposal.description),
+            __html: sanitizeHtml(getProposalDescription(proposal.description), {
+              allowedTags: sanitizeHtml.defaults.allowedTags.concat(["img"]),
+            }),
           }}
         />
       </div>
     </Layout>
   );
 }
+
+const VoteButton = () => {
+  const { data: userBalance } = useTokenBalance({
+    tokenContract: TOKEN_CONTRACT,
+  });
+  if (!userBalance || userBalance.lt(1)) return <Fragment />;
+};
 
 const ProgressBar = ({
   label,
@@ -199,11 +222,13 @@ const ProgressBar = ({
 
   return (
     <div className="w-full">
-      <div className="flex justify-between mb-1">
+      <div className="flex flex-col sm:flex-row justify-between mb-1">
         <div className={`${textColor} font-heading text-xl`}>{label}</div>
-        <div className="font-semibold text-xl">{value}</div>
+        <div className="font-semibold text-xl mt-4 sm:mt-0 text-center sm:text-left">
+          {value}
+        </div>
       </div>
-      <div className={`w-full ${bgColor} rounded-full h-4`}>
+      <div className={`w-full ${bgColor} rounded-full h-4 mt-4 sm:mt-0`}>
         <div
           className={`${baseColor} h-4 rounded-full`}
           style={{ width: `${percentage}%` }}

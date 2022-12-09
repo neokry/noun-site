@@ -80,3 +80,17 @@ export const getFounder = async ({
   );
   return { wallet, ownershipPct, vestExpiry } as Founder;
 };
+
+export const getBalanceOf = async ({
+  address,
+  user,
+}: {
+  address: `0x${string}`;
+  user: `0x${string}`;
+}) => {
+  const tokenContract = token({
+    address,
+  });
+
+  return await tokenContract.balanceOf(user);
+};

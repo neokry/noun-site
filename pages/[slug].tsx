@@ -66,7 +66,7 @@ export default function SiteComponent(
   return (
     <Layout>
       <div
-        className={`h-full relative flex flex-col z-20 ${getAlignment()} w-full wrapper focus:outline-none prose prose-skin prose-headings:font-heading prose-xl max-w-none`}
+        className={`h-full relative flex flex-col z-20 ${getAlignment()} w-full wrapper focus:outline-none break-words prose prose-skin prose-headings:font-heading prose-xl max-w-none`}
       >
         <MDXRemote {...data} />
       </div>

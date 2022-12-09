@@ -118,7 +118,7 @@ export default function SiteComponent({
       </div>
 
       <div className="bg-skin-backdrop px-2 sm:px-52">
-        <div className="h-full w-full wrapper focus:outline-none pt-12 p-6 prose prose-skin prose-headings:font-heading lg:prose-xl max-w-none">
+        <div className="h-full w-full wrapper focus:outline-none pt-12 p-6 break-words prose prose-skin prose-headings:font-heading lg:prose-xl max-w-none">
           <MDXRemote {...descriptionSource} />
         </div>
 
@@ -131,7 +131,7 @@ export default function SiteComponent({
                 }
                 title={x.frontmatter?.title || ""}
               >
-                <div className="prose prose-skin prose-headings:font-heading max-w-none mt-8">
+                <div className="prose prose-skin prose-headings:font-heading break-words max-w-none mt-8">
                   <MDXRemote {...x} />
                 </div>
               </FaqElement>

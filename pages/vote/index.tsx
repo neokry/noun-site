@@ -56,24 +56,24 @@ export default function Vote({
     <Layout>
       <div className="text-2xl font-heading text-skin-muted">Governance</div>
 
-      <div className="h-full w-full wrapper focus:outline-none pt-4 prose prose-skin prose-headings:font-heading lg:prose-xl max-w-none">
+      <div className="h-full w-full wrapper focus:outline-none pt-4 break-words prose prose-skin prose-headings:font-heading lg:prose-xl max-w-none">
         <MDXRemote {...descriptionSource} />
       </div>
 
-      <div className="border border-skin-stroke rounded-2xl px-6 mt-6 flex items-center justify-between h-32">
-        <div className="py-6 h-full">
+      <div className="border border-skin-stroke rounded-2xl py-6 sm:py-0 px-6 mt-6 flex flex-col sm:flex-row sm:items-center justify-between sm:h-32">
+        <div className="sm:py-6 h-full">
           <div className="font-heading text-2xl text-skin-muted">Treasury</div>
           <div className="text-4xl font-heading mt-2">
             Ξ {treasuryBalance ? formatTreasuryBalance(treasuryBalance) : "0"}
           </div>
         </div>
-        <div className="w-1/3 border-l pl-6 h-full flex items-center text-skin-muted">
+        <div className="sm:w-1/3 mt-4 sm:mt-0 sm:border-l sm:pl-6 h-full flex items-center text-skin-muted">
           This treasury exists for DAO participants to allocate resources for
           the long-term growth and prosperity of the project.
         </div>
       </div>
 
-      <div className="mt-8">
+      <div className="mt-12">
         <div className="text-4xl font-heading text-skin-base">Proposals</div>
         <div>
           {proposals?.map((x, i) => (
@@ -99,13 +99,13 @@ const ProposalPlacard = ({
   return (
     <Link
       href={`/vote/${proposal.proposalId}`}
-      className="flex items-center justify-between w-full bg-skin-fill hover:bg-skin-muted border border-skin-stroke p-4 my-4 rounded-2xl"
+      className="flex items-center justify-between w-full bg-skin-fill hover:bg-skin-muted border border-skin-stroke p-4 my-6 rounded-2xl"
     >
-      <div className="flex items-center">
-        <div className="text-xl font-semibold mr-6 text-skin-muted">
-          {proposalNumber}
-        </div>
+      <div className="flex items-center pr-4">
         <div className="text-xl font-semibold text-skin-base">
+          <span className="text-skin-muted mr-3 sm:mr-4 sm:ml-2">
+            {proposalNumber}
+          </span>
           {getProposalName(proposal.description)}
         </div>
       </div>
