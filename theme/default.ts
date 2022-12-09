@@ -1,6 +1,5 @@
 import { ThemeConfig } from "types/ThemeConfig";
-import { lightColors } from "./colors/light";
-import { darkColors } from "./colors/dark";
+import { lightColors, darkColors } from "./colors";
 
 export const lightTheme: ThemeConfig = {
   styles: { colors: lightColors },

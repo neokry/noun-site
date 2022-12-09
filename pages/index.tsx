@@ -112,7 +112,7 @@ export default function SiteComponent({
         },
       }}
     >
-      <div className="bg-skin-fill min-h-[92vh]">
+      <div className="bg-skin-fill min-h-[95vh]">
         <Header />
         <Hero />
       </div>

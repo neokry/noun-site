@@ -24,7 +24,7 @@ export const SettleAuction = ({ auction }: { auction?: string }) => {
   return (
     <button
       onClick={() => write?.()}
-      className="w-full bg-black h-12 text-white mt-6 rounded-md flex items-center justify-around"
+      className="w-full bg-skin-button-accent hover:bg-skin-button-accent-hover h-12 text-white mt-6 rounded-lg flex items-center justify-around"
     >
       {isLoading ? (
         <Image src="/spinner.svg" height={26} width={26} alt="spinner" />
