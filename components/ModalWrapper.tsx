@@ -6,7 +6,7 @@ export default function ModalWrapper({
   children,
   open,
   setOpen,
-  className = "w-full max-w-lg",
+  className = "w-full max-w-lg bg-white",
 }: {
   children: React.ReactNode;
   open: boolean;
@@ -52,7 +52,7 @@ export default function ModalWrapper({
             <div
               className={`inline-block align-bottom rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle ${className}`}
             >
-              <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4 w-full">
+              <div className="px-4 pt-5 pb-4 sm:p-6 sm:pb-4 w-full">
                 {children}
               </div>
             </div>

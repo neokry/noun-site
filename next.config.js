@@ -6,15 +6,9 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "d1dues304i0c30.cloudfront.net",
+        hostname: process.env.NEXT_PUBLIC_IPFS_GATEWAY,
         port: "",
         pathname: "/**",
-      },
-      {
-        protocol: "https",
-        hostname: "api.zora.co",
-        port: "",
-        pathname: "/renderer/**",
       },
     ],
   },

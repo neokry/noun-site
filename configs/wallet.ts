@@ -5,7 +5,9 @@ import { alchemyProvider } from "wagmi/providers/alchemy";
 import { publicProvider } from "wagmi/providers/public";
 
 const { chains, provider } = configureChains(
-  [chain.mainnet],
+  process.env.NEXT_PUBLIC_TOKEN_NETWORK == "5"
+    ? [chain.goerli]
+    : [chain.mainnet],
   [
     alchemyProvider({ apiKey: process.env.NEXT_PUBLIC_ALCHEMY_KEY! }),
     publicProvider(),

@@ -13,7 +13,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     "Cache-Control",
     `s-maxage=60, stale-while-revalidate=${ONE_DAY_IN_SECONDS}`
   );
-  res.send(balance);
+  res.send(balance.toNumber());
 };
 
 export default handler;

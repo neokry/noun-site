@@ -15,9 +15,9 @@ import ModalWrapper from "@/components/ModalWrapper";
 import VoteModal from "@/components/VoteModal";
 import { Fragment, useState } from "react";
 import { useTokenBalance } from "@/hooks/fetch/useTokenBalance";
+import { Proposal } from "@/services/nouns-builder/governor";
 
-export default function Proposal() {
-  const [modalOpen, setModalOpen] = useState(false);
+export default function ProposalComponent() {
   const { data: addresses } = useDAOAddresses({
     tokenContract: TOKEN_CONTRACT,
   });
@@ -79,34 +79,35 @@ export default function Proposal() {
 
   return (
     <Layout>
-      <ModalWrapper open={modalOpen} setOpen={setModalOpen}>
-        <VoteModal proposal={proposal} proposalNumber={proposalNumber} />
-      </ModalWrapper>
-      <div className="flex items-baseline">
-        <Link
-          href="/vote"
-          className="flex items-center border border-skin-stroke hover:bg-skin-muted rounded-full p-2 mr-4"
-        >
-          <ArrowLeftIcon className="h-4" />
-        </Link>
+      <div className="flex flex-col sm:flex-row items-baseline justify-between">
+        <div className="flex items-baseline">
+          <Link
+            href="/vote"
+            className="flex items-center border border-skin-stroke hover:bg-skin-muted rounded-full p-2 mr-4"
+          >
+            <ArrowLeftIcon className="h-4" />
+          </Link>
 
-        <div>
-          <div className="flex items-center">
-            <div className="font-heading text-2xl text-skin-muted mr-4">
-              Proposal {proposalNumber}
+          <div className="">
+            <div className="flex items-center">
+              <div className="font-heading text-2xl text-skin-muted mr-4">
+                Proposal {proposalNumber}
+              </div>
+              <ProposalStatus proposal={proposal} />
             </div>
-            <ProposalStatus proposal={proposal} />
-          </div>
-          <div className="mt-2 text-5xl font-heading text-skin-base">
-            {getProposalName(proposal.description)}
-          </div>
-          <div className="mt-4 text-2xl font-heading text-skin-muted">
-            Proposed by{" "}
-            <span className="text-skin-highlighted">
-              {ensName || shortenAddress(proposal.proposal.proposer)}
-            </span>
+            <div className="mt-2 text-5xl font-heading text-skin-base">
+              {getProposalName(proposal.description)}
+            </div>
+            <div className="mt-4 text-2xl font-heading text-skin-muted">
+              Proposed by{" "}
+              <span className="text-skin-highlighted">
+                {ensName || shortenAddress(proposal.proposal.proposer)}
+              </span>
+            </div>
           </div>
         </div>
+
+        <VoteButton proposal={proposal} proposalNumber={proposalNumber} />
       </div>
 
       <div className="items-center w-full grid grid-cols-3 gap-4 mt-12">
@@ -180,11 +181,38 @@ export default function Proposal() {
   );
 }
 
-const VoteButton = () => {
+const VoteButton = ({
+  proposal,
+  proposalNumber,
+}: {
+  proposal: Proposal;
+  proposalNumber: number;
+}) => {
+  const [modalOpen, setModalOpen] = useState(false);
   const { data: userBalance } = useTokenBalance({
     tokenContract: TOKEN_CONTRACT,
   });
-  if (!userBalance || userBalance.lt(1)) return <Fragment />;
+
+  if (proposal.state !== 1 || !userBalance || userBalance < 1)
+    return <Fragment />;
+
+  return (
+    <Fragment>
+      <ModalWrapper
+        className="w-full max-w-lg bg-skin-muted"
+        open={modalOpen}
+        setOpen={setModalOpen}
+      >
+        <VoteModal proposal={proposal} proposalNumber={proposalNumber} />
+      </ModalWrapper>
+      <button
+        className="bg-skin-button-accent text-skin-inverted rounded-xl px-4 py-3 font-semibold w-full sm:w-auto mt-8 sm:mt-0"
+        onClick={() => setModalOpen(true)}
+      >
+        Submit vote
+      </button>
+    </Fragment>
+  );
 };
 
 const ProgressBar = ({

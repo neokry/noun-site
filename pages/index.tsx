@@ -73,6 +73,8 @@ export const getStaticProps = async (): Promise<
     )
   );
 
+  if (!contract.image) contract.image = "";
+
   return {
     props: {
       tokenContract,

@@ -8,5 +8,5 @@ export const useTokenBalance = ({
   tokenContract: string;
 }) => {
   const { address } = useAccount();
-  return useSWR<BigNumber>(`/api/token/${tokenContract}/balance/${address}`);
+  return useSWR<number>(`/api/token/${tokenContract}/balance/${address}`);
 };

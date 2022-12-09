@@ -2,6 +2,7 @@ export default function getNormalizedURI(
   uri: string,
   { preferredIPFSGateway }: { preferredIPFSGateway?: string }
 ) {
+  if (!uri) return uri;
   if (uri.startsWith("ipfs://")) {
     return uri.replace(
       "ipfs://",

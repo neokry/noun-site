@@ -24,7 +24,7 @@ export const lightColors: ThemeColors = {
   "text-highlighted": "256, 256, 256",
   "button-accent": withRGB(colors.gray["900"]),
   "button-accent-hover": withRGB(colors.gray["700"]),
-  "button-muted": withRGB(colors.gray["500"]),
+  "button-muted": withRGB(colors.gray["300"]),
 };
 
 export const darkColors: ThemeColors = {
