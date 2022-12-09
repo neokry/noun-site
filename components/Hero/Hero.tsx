@@ -1,9 +1,7 @@
 import { BigNumber, ethers, utils } from "ethers";
 import Image from "next/image";
 import { CountdownDisplay } from "../CountdownDisplay";
-import useAuctionInfo from "@/hooks/fetch/useCurrentAuctionInfo";
-import useContractInfo from "hooks/fetch/useContractInfo";
-import useTokenInfo from "hooks/fetch/useTokenInfo";
+import { useCurrentAuctionInfo, useContractInfo, useTokenInfo } from "hooks";
 import { compareAddress } from "@/utils/compareAddress";
 import { SettleAuction } from "./SettleAuction";
 import { PlaceBid } from "./PlaceBid";
@@ -13,7 +11,7 @@ import { useTheme } from "@/hooks/useTheme";
 
 export default function Hero() {
   const { data: contractInfo } = useContractInfo();
-  const { data: auctionInfo } = useAuctionInfo({
+  const { data: auctionInfo } = useCurrentAuctionInfo({
     auctionContract: contractInfo?.auction,
   });
   const [theme] = useTheme();

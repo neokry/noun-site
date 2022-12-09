@@ -3,6 +3,7 @@ import { Fragment } from "react";
 import { useEnsName, useEnsAvatar } from "wagmi";
 import getNormalizedURI from "@/utils/getNormalizedURI";
 import { useTheme } from "@/hooks/useTheme";
+import { shortenAddress } from "@/utils/shortenAddress";
 
 export const HighestBidder = ({ address }: { address?: `0x${string}` }) => {
   const { data: ensName } = useEnsName({ address });
@@ -10,10 +11,6 @@ export const HighestBidder = ({ address }: { address?: `0x${string}` }) => {
   const [theme] = useTheme();
 
   const len = address?.length || 0;
-  const shortAddress = `${address?.slice(0, 5)}...${address?.slice(
-    len - 5,
-    len
-  )}`;
 
   if (!address) return <Fragment />;
 
@@ -36,7 +33,7 @@ export const HighestBidder = ({ address }: { address?: `0x${string}` }) => {
           />
         )}
         <div className="font-semibold text-skin-base">
-          {ensName || shortAddress}
+          {ensName || shortenAddress(address)}
         </div>
       </div>
     </div>

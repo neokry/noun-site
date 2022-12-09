@@ -27,9 +27,3 @@ export const getCurrentAuction = async ({ address }: { address: string }) => {
     settled,
   } as AuctionInfo;
 };
-
-export const getTreasury = async ({ address }: { address: string }) => {
-  return await auction({
-    address: address as string,
-  }).treasury();
-};

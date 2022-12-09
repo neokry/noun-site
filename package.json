@@ -9,7 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@buildersdk/sdk": "^0.0.4",
+    "@buildersdk/sdk": "^0.1.0",
     "@headlessui/react": "^1.7.4",
     "@heroicons/react": "^2.0.13",
     "@rainbow-me/rainbowkit": "^0.8.0",

@@ -1,28 +1,33 @@
 import Image from "next/image";
-import useContractInfo from "hooks/fetch/useContractInfo";
-import { useTheme } from "@/hooks/useTheme";
+import {
+  useContractInfo,
+  useDAOAddresses,
+  useTreasuryBalance,
+  useTheme,
+} from "hooks";
 import NavigationItemsComponent from "./NavigationItem";
 import Link from "next/link";
-import useTreasuryBalance from "@/hooks/fetch/useTreasuryBalance";
 import { utils } from "ethers";
 import { ETHERSCAN_BASEURL } from "constants/urls";
 import CustomConnectButton from "./CustomConnectButton";
 import { Bars3Icon } from "@heroicons/react/20/solid";
-import { useAtom } from "jotai";
-import mobileMenu from "globals/mobileMenu";
 import MobileMenu from "./MobileMenu";
 import { Fragment, useState } from "react";
+import { TOKEN_CONTRACT } from "constants/addresses";
 
 export default function Header() {
   const { data: contractInfo } = useContractInfo();
+  const { data: addresses } = useDAOAddresses({
+    tokenContract: TOKEN_CONTRACT,
+  });
   const { data: treasury } = useTreasuryBalance({
-    auctionContract: contractInfo?.auction,
+    treasuryContract: addresses?.treasury,
   });
   const [theme] = useTheme();
   const [showMobile, setShowMobile] = useState(false);
 
   const getBalance = () => {
-    const balance = parseFloat(utils.formatEther(treasury?.balance || 0));
+    const balance = parseFloat(utils.formatEther(treasury || 0));
     if (balance > 1000) return balance.toFixed(2);
     if (balance > 100) return balance.toFixed(3);
     return balance.toFixed(4);
@@ -50,7 +55,7 @@ export default function Header() {
           <Link
             rel="noreferer noopener noreferrer"
             target="_blank"
-            href={`${ETHERSCAN_BASEURL}/tokenholdings?a=${treasury?.address}`}
+            href={`${ETHERSCAN_BASEURL}/tokenholdings?a=${addresses?.treasury}`}
             className="ml-4 border hover:bg-skin-backdrop transition ease-in-out hover:scale-110 font-semibold rounded-xl px-6 h-10 flex items-center justify-around text-skin-muted border-skin-stroke"
           >
             Ξ {getBalance()}

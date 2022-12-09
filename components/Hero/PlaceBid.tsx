@@ -8,7 +8,7 @@ import {
   useAccount,
 } from "wagmi";
 import { AuctionABI } from "@buildersdk/sdk";
-import useDebounce from "@/hooks/useDebounce";
+import { useDebounce } from "@/hooks/useDebounce";
 import { useTheme } from "@/hooks/useTheme";
 
 export const PlaceBid = ({

@@ -92,10 +92,10 @@
     "@babel/helper-validator-identifier" "^7.19.1"
     to-fast-properties "^2.0.0"
 
-"@buildersdk/sdk@^0.0.4":
-  version "0.0.4"
-  resolved "https://registry.yarnpkg.com/@buildersdk/sdk/-/sdk-0.0.4.tgz#1eee3f0fa50b1bd44c45c2c5fa96cc5620d4d8fb"
-  integrity sha512-1gytH9qOXY5kMVaz/R18pzkZfdwYE11ri+U7c6nL5s7MVZF5+7fvBoIrS7Mg4u9+kehKz13llb7XcjCrm72pyQ==
+"@buildersdk/sdk@^0.1.0":
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/@buildersdk/sdk/-/sdk-0.1.0.tgz#032b0a77e48d89c210a9912066228bdc1cb0696d"
+  integrity sha512-XF/DStcHD8WksjzCBH7RY1n3rw4YhdO6BNUbcmewD75jOwPec25Dds+NLwWQPWV6M6uTBJIClU4ks6/S2nwORw==
   dependencies:
     "@wagmi/core" "^0.7.5"
 

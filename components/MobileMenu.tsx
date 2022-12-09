@@ -1,7 +1,5 @@
 import { useTheme } from "@/hooks/useTheme";
 import { Transition } from "@headlessui/react";
-import mobileMenu from "globals/mobileMenu";
-import { useAtom } from "jotai";
 import CustomConnectButton from "./CustomConnectButton";
 import NavigationItemComponent from "./NavigationItem";
 

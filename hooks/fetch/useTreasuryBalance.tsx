@@ -1,14 +1,12 @@
-import { TreasuryResponse } from "pages/api/auction/[address]/treasury";
+import { BigNumber } from "ethers";
 import useSWR from "swr";
 
-const useTreasuryBalance = ({
-  auctionContract,
+export const useTreasuryBalance = ({
+  treasuryContract,
 }: {
-  auctionContract?: string;
+  treasuryContract?: string;
 }) => {
-  return useSWR<TreasuryResponse>(
-    auctionContract ? `/api/auction/${auctionContract}/treasury` : undefined
+  return useSWR<BigNumber>(
+    treasuryContract ? `/api/treasury/${treasuryContract}` : undefined
   );
 };
-
-export default useTreasuryBalance;

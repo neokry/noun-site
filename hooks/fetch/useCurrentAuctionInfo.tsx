@@ -1,7 +1,7 @@
 import { AuctionInfo } from "data/nouns-builder/auction";
 import useSWR from "swr";
 
-const useCurrentAuctionInfo = ({
+export const useCurrentAuctionInfo = ({
   auctionContract,
 }: {
   auctionContract?: string;
@@ -10,5 +10,3 @@ const useCurrentAuctionInfo = ({
     auctionContract ? `/api/auction/${auctionContract}` : undefined
   );
 };
-
-export default useCurrentAuctionInfo;
