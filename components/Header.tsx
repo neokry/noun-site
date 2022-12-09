@@ -14,6 +14,7 @@ import { Bars3Icon } from "@heroicons/react/20/solid";
 import MobileMenu from "./MobileMenu";
 import { Fragment, useState } from "react";
 import { TOKEN_CONTRACT } from "constants/addresses";
+import { formatTreasuryBalance } from "@/utils/formatTreasuryBalance";
 
 export default function Header() {
   const { data: contractInfo } = useContractInfo();
@@ -25,13 +26,6 @@ export default function Header() {
   });
   const [theme] = useTheme();
   const [showMobile, setShowMobile] = useState(false);
-
-  const getBalance = () => {
-    const balance = parseFloat(utils.formatEther(treasury || 0));
-    if (balance > 1000) return balance.toFixed(2);
-    if (balance > 100) return balance.toFixed(3);
-    return balance.toFixed(4);
-  };
 
   return (
     <Fragment>
@@ -58,7 +52,7 @@ export default function Header() {
             href={`${ETHERSCAN_BASEURL}/tokenholdings?a=${addresses?.treasury}`}
             className="ml-4 border hover:bg-skin-backdrop transition ease-in-out hover:scale-110 font-semibold rounded-xl px-6 h-10 flex items-center justify-around text-skin-muted border-skin-stroke"
           >
-            Ξ {getBalance()}
+            Ξ {treasury ? formatTreasuryBalance(treasury) : "0"}
           </Link>
         </div>
 

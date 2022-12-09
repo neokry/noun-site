@@ -29,7 +29,9 @@ export default function Proposal() {
 
   const proposal = proposals?.find((x) => x.proposalId === proposalid);
 
-  const { data } = useEnsName({ address: proposal?.proposal.proposer });
+  const { data: ensName } = useEnsName({
+    address: proposal?.proposal.proposer,
+  });
 
   if (!proposal)
     return (
@@ -92,7 +94,7 @@ export default function Proposal() {
           <div className="mt-4 text-2xl font-heading text-skin-muted">
             Proposed by{" "}
             <span className="text-skin-highlighted">
-              {data || shortenAddress(proposal.proposal.proposer)}
+              {ensName || shortenAddress(proposal.proposal.proposer)}
             </span>
           </div>
         </div>
