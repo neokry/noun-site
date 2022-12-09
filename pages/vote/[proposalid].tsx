@@ -222,7 +222,7 @@ const ProgressBar = ({
 
   return (
     <div className="w-full">
-      <div className="flex flex-col sm:flex-row justify-between mb-1">
+      <div className="flex flex-col items-center sm:items-start sm:flex-row justify-between mb-1">
         <div className={`${textColor} font-heading text-xl`}>{label}</div>
         <div className="font-semibold text-xl mt-4 sm:mt-0 text-center sm:text-left">
           {value}
