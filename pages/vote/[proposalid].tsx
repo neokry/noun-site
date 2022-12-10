@@ -169,7 +169,7 @@ export default function ProposalComponent() {
         <div className="text-2xl font-heading text-skin-muted">Description</div>
 
         <div
-          className="prose prose-skin mt-4 prose-img:w-auto break-words max-w-[90vw] sm:max-w-prose"
+          className="prose prose-skin mt-4 prose-img:w-auto break-words max-w-[90vw] sm:max-w-[1000px]"
           dangerouslySetInnerHTML={{
             __html: sanitizeHtml(getProposalDescription(proposal.description), {
               allowedTags: sanitizeHtml.defaults.allowedTags.concat(["img"]),
