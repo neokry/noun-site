@@ -51,7 +51,7 @@ export default function Hero() {
   console.log("tokenId", tokenId);
 
   return (
-    <div className="flex flex-col sm:flex-row items-center sm:h-[80vh] pt-10">
+    <div className="flex flex-col sm:flex-row items-center sm:h-[80vh] sm:max-h-[600px] pt-10">
       <div className="sm:w-1/2 mx-4 flex flex-col min-h-[400px] sm:min-h-auto justify-baseline items-end sm:pr-12 h-full relative">
         {tokenInfo && (
           <Image

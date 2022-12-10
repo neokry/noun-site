@@ -4,10 +4,12 @@ import Header from "./Header";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="bg-skin-backdrop text-skin-base min-h-screen">
-      <Header />
-      <div className="p-6 sm:px-52 mt-8">{children}</div>
-      <Footer />
+    <div className="bg-skin-backdrop text-skin-base min-h-screen flex items-center justify-around">
+      <div className="max-w-[1400px] flex flex-col items-center justify-around">
+        <Header />
+        <div className="p-6 lg:px-12 xl:px-24 mt-8 w-full">{children}</div>
+        <Footer />
+      </div>
     </div>
   );
 }

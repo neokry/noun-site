@@ -17,6 +17,7 @@ import { promises as fs } from "fs";
 import path from "path";
 import Footer from "@/components/Footer";
 import FaqElement from "@/components/FaqElement";
+import Layout from "@/components/Layout";
 
 export const getStaticProps = async (): Promise<
   GetStaticPropsResult<{
@@ -114,34 +115,40 @@ export default function SiteComponent({
         },
       }}
     >
-      <div className="bg-skin-fill">
-        <Header />
-        <Hero />
-      </div>
-
-      <div className="bg-skin-backdrop px-2 sm:px-52">
-        <div className="h-full w-full wrapper focus:outline-none pt-12 p-6 break-words prose prose-skin prose-headings:font-heading lg:prose-xl max-w-none">
-          <MDXRemote {...descriptionSource} />
+      <div className="bg-skin-backdrop text-skin-base min-h-screen flex flex-col items-center justify-around">
+        <div className="bg-skin-fill w-full flex items-center justify-around">
+          <div className="max-w-[1400px]">
+            <Header />
+            <Hero />
+          </div>
         </div>
+        <div className="max-w-[1400px]">
+          <div>
+            <div className="bg-skin-backdrop p-6 lg:px-24 xl:px-52 mt-8">
+              <div className="h-full w-full wrapper focus:outline-none pt-12 p-6 break-words prose prose-skin prose-headings:font-heading lg:prose-xl max-w-none">
+                <MDXRemote {...descriptionSource} />
+              </div>
 
-        <div className="pt-12 p-8 ">
-          {faqSources.map((x, i) => (
-            <div key={i} className="mb-10">
-              <FaqElement
-                className={
-                  "flex items-center justify-between w-full text-left text-4xl font-heading text-skin-base hover:text-skin-highlighted"
-                }
-                title={x.frontmatter?.title || ""}
-              >
-                <div className="prose prose-skin prose-headings:font-heading break-words max-w-none mt-8">
-                  <MDXRemote {...x} />
-                </div>
-              </FaqElement>
+              <div className="pt-12 p-8 ">
+                {faqSources.map((x, i) => (
+                  <div key={i} className="mb-10">
+                    <FaqElement
+                      className={
+                        "flex items-center justify-between w-full text-left text-4xl font-heading text-skin-base hover:text-skin-highlighted"
+                      }
+                      title={x.frontmatter?.title || ""}
+                    >
+                      <div className="prose prose-skin prose-headings:font-heading break-words max-w-none mt-8">
+                        <MDXRemote {...x} />
+                      </div>
+                    </FaqElement>
+                  </div>
+                ))}
+              </div>
             </div>
-          ))}
+          </div>
+          <Footer />
         </div>
-
-        <Footer />
       </div>
     </SWRConfig>
   );

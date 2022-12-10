@@ -7,7 +7,6 @@ import {
 } from "hooks";
 import NavigationItemsComponent from "./NavigationItem";
 import Link from "next/link";
-import { utils } from "ethers";
 import { ETHERSCAN_BASEURL } from "constants/urls";
 import CustomConnectButton from "./CustomConnectButton";
 import { Bars3Icon } from "@heroicons/react/20/solid";
@@ -29,7 +28,7 @@ export default function Header() {
 
   return (
     <Fragment>
-      <div className="flex items-center justify-between px-6 sm:px-44 py-8">
+      <div className="flex items-center justify-between w-full px-6 py-8 xl:w-[1200px]">
         <div className="flex items-center z-20">
           <Link href={"/"} className="flex items-center">
             {contractInfo?.image && (
