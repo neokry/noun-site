@@ -10,12 +10,18 @@ export type AuctionInfo = {
   settled: boolean;
 };
 
+export type PreviousAuction = {
+  tokenId: string;
+  winner: `0x${string}`;
+  amount: string;
+};
+
 const { auction } = BuilderSDK.connect({ signerOrProvider: DefaultProvider });
 
 export const getCurrentAuction = async ({ address }: { address: string }) => {
   const { tokenId, highestBid, highestBidder, startTime, endTime, settled } =
     await auction({
-      address: address as string,
+      address,
     }).auction();
 
   return {
@@ -26,4 +32,18 @@ export const getCurrentAuction = async ({ address }: { address: string }) => {
     endTime,
     settled,
   } as AuctionInfo;
+};
+
+export const getPreviousAuctions = async ({ address }: { address: string }) => {
+  const auctionContract = auction({ address });
+  const filter = auctionContract.filters.AuctionSettled(null, null, null);
+  const events = await auctionContract.queryFilter(filter);
+  return events.map(
+    (x) =>
+      ({
+        tokenId: x.args?.tokenId.toHexString(),
+        winner: x.args?.winner,
+        amount: x.args?.amount.toHexString(),
+      } as PreviousAuction)
+  );
 };

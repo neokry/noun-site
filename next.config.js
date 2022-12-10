@@ -10,6 +10,12 @@ const nextConfig = {
         port: "",
         pathname: "/**",
       },
+      {
+        protocol: "https",
+        hostname: "api.zora.co",
+        port: "",
+        pathname: "/renderer/**",
+      },
     ],
   },
 };

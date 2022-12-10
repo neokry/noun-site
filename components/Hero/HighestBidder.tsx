@@ -1,16 +1,12 @@
-import Image from "next/image";
 import { Fragment } from "react";
-import { useEnsName, useEnsAvatar } from "wagmi";
-import getNormalizedURI from "@/utils/getNormalizedURI";
+import { useEnsName } from "wagmi";
 import { useTheme } from "@/hooks/useTheme";
 import { shortenAddress } from "@/utils/shortenAddress";
+import UserAvatar from "../UserAvatar";
 
 export const HighestBidder = ({ address }: { address?: `0x${string}` }) => {
   const { data: ensName } = useEnsName({ address });
-  const { data: ensAvatar } = useEnsAvatar({ address });
   const [theme] = useTheme();
-
-  const len = address?.length || 0;
 
   if (!address) return <Fragment />;
 
@@ -21,19 +17,11 @@ export const HighestBidder = ({ address }: { address?: `0x${string}` }) => {
       </div>
 
       <div className="flex items-center">
-        {ensAvatar && (
-          <Image
-            src={getNormalizedURI(ensAvatar, {
-              preferredIPFSGateway: process.env.NEXT_PUBLIC_IPFS_GATEWAY,
-            })}
-            className="mr-2 rounded-full w-8 h-8"
-            alt="avatar"
-            height={20}
-            width={20}
-          />
-        )}
-        <div className="font-semibold text-skin-base">
-          {ensName || shortenAddress(address)}
+        <div className="flex items-center mt-2">
+          <UserAvatar className="h-6 rounded-full mr-2" address={address} />
+          <div className="font-semibold text-skin-base">
+            {ensName || shortenAddress(address)}
+          </div>
         </div>
       </div>
     </div>

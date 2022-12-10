@@ -18,6 +18,7 @@ export type ContractInfo = {
 export type TokenInfo = {
   name: string;
   image: string;
+  owner: `0x${string}`;
 };
 
 export type Founder = {
@@ -59,9 +60,12 @@ export const getTokenInfo = async ({
   const tokenContract = token({
     address: address as string,
   });
-
-  const tokenURI = await tokenContract.tokenURI(BigNumber.from(tokenid));
-  return parseBase64String(tokenURI) as TokenInfo;
+  const tokenIdBn = BigNumber.from(tokenid);
+  const [tokenURI, owner] = await Promise.all([
+    tokenContract.tokenURI(tokenIdBn),
+    tokenContract.ownerOf(tokenIdBn),
+  ]);
+  return { ...parseBase64String(tokenURI), owner: owner } as TokenInfo;
 };
 
 export const getFounder = async ({
