@@ -69,7 +69,7 @@ export default function Hero() {
           <Image src={"/spinner.svg"} alt="spinner" width={30} height={30} />
         </div>
       </div>
-      <div className="px-4 w-screen sm:w-auto h-64 sm:h-full flex flex-col justify-stretch items-stretch mt-6 sm:mt-0">
+      <div className="px-4 w-screen sm:w-auto min-h-64 sm:h-full flex flex-col justify-stretch items-stretch mt-6 sm:mt-0">
         <div className="flex items-center mb-4">
           <button
             onClick={pageBack}
