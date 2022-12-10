@@ -90,7 +90,7 @@ export default function ProposalComponent() {
 
           <div className="">
             <div className="flex items-center">
-              <div className="font-heading text-2xl text-skin-muted mr-4">
+              <div className="font-heading text-2xl text-skin-muted mr-4 break-words">
                 Proposal {proposalNumber}
               </div>
               <ProposalStatus proposal={proposal} />
@@ -137,7 +137,7 @@ export default function ProposalComponent() {
         </div>
       </div>
 
-      <div className="items-center w-full grid gir sm:grid-cols-3 gap-4 mt-4">
+      <div className="items-center w-full grid sm:grid-cols-3 gap-4 mt-4">
         <div className="w-full border border-skin-stroke rounded-xl p-6 flex justify-between items-center sm:items-baseline">
           <div className="font-heading text-xl text-skin-muted">Threshold</div>
           <div className="text-right">
@@ -169,7 +169,7 @@ export default function ProposalComponent() {
         <div className="text-2xl font-heading text-skin-muted">Description</div>
 
         <div
-          className="prose prose-skin mt-4 prose-img:w-auto break-words"
+          className="prose prose-skin mt-4 prose-img:w-auto break-words max-w-[90vw] sm:max-w-prose"
           dangerouslySetInnerHTML={{
             __html: sanitizeHtml(getProposalDescription(proposal.description), {
               allowedTags: sanitizeHtml.defaults.allowedTags.concat(["img"]),

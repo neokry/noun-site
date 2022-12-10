@@ -10,11 +10,11 @@ export default function MobileMenu({ show }: { show: boolean }) {
     <Transition
       show={show}
       enter="transition-[height] duration-300"
-      enterFrom="h-0"
-      enterTo="h-52"
+      enterFrom="h-0 w-full"
+      enterTo="h-52 w-full"
       leave="transition-[height] duration-300"
-      leaveFrom="h-52"
-      leaveTo="h-0"
+      leaveFrom="h-52 w-full"
+      leaveTo="h-0 w-full"
     >
       <div className="flex flex-col px-4 mb-4">
         {theme.nav.primary.map((item, i) => (

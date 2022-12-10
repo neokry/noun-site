@@ -53,7 +53,9 @@ export default function Vote({
 
   return (
     <Layout>
-      <div className="text-2xl font-heading text-skin-muted">Governance</div>
+      <div className="text-2xl relative font-heading text-skin-muted">
+        Governance
+      </div>
 
       <div className="h-full w-full wrapper focus:outline-none pt-4 break-words prose prose-skin prose-headings:font-heading lg:prose-xl max-w-none">
         <MDXRemote {...descriptionSource} />
