@@ -95,7 +95,7 @@ export default function ProposalComponent() {
               </div>
               <ProposalStatus proposal={proposal} />
             </div>
-            <div className="mt-2 text-5xl font-heading text-skin-base">
+            <div className="mt-2 text-5xl font-heading text-skin-base font-semibold">
               {getProposalName(proposal.description)}
             </div>
             <div className="mt-4 text-2xl font-heading text-skin-muted">

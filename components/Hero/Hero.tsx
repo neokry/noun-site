@@ -103,7 +103,7 @@ export default function Hero() {
           </button>
         </div>
 
-        <div className="text-4xl sm:text-6xl font-heading text-skin-base">
+        <div className="text-4xl sm:text-6xl font-heading text-skin-base font-semibold">
           {tokenInfo?.name || "---"}
         </div>
 

@@ -4,6 +4,9 @@ import merge from "lodash.merge";
 
 export const theme: ThemeConfig = merge(lightTheme, {
   styles: {
+    fonts: {
+      heading: "Roboto",
+    },
     colors: {
       "text-highlighted": "0, 133, 255",
     },
