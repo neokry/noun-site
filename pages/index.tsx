@@ -18,6 +18,8 @@ import path from "path";
 import Footer from "@/components/Footer";
 import FaqElement from "@/components/FaqElement";
 
+type MarkdownSource = MDXRemoteSerializeResult<Record<string, unknown>>;
+
 export const getStaticProps = async (): Promise<
   GetStaticPropsResult<{
     tokenContract: string;
@@ -25,8 +27,8 @@ export const getStaticProps = async (): Promise<
     contract: ContractInfo;
     token: TokenInfo;
     auction: AuctionInfo;
-    descriptionSource: MDXRemoteSerializeResult<Record<string, unknown>>;
-    faqSources: MDXRemoteSerializeResult<Record<string, unknown>>[];
+    descriptionSource: MarkdownSource;
+    faqSources: MarkdownSource[];
   }>
 > => {
   // Get token and auction info
@@ -52,26 +54,32 @@ export const getStaticProps = async (): Promise<
   );
   const descMD = await serialize(descFile);
 
-  const faqFiles = await fs.readdir(templateDirectory + "/home/faq", {
-    withFileTypes: true,
-  });
-  const faqSources = await Promise.all(
-    faqFiles
-      .filter((dirent) => dirent.isFile())
-      .map(async (file) => {
-        const faqFile = await fs.readFile(
-          templateDirectory + "/home/faq/" + file.name,
-          "utf8"
-        );
+  let faqSources: MarkdownSource[] = [];
+  try {
+    const faqFiles = await fs.readdir(templateDirectory + "/home/faq", {
+      withFileTypes: true,
+    });
 
-        return serialize(faqFile, { parseFrontmatter: true });
-      })
-  ).then((x) =>
-    x.sort(
-      (a, b) =>
-        Number(a.frontmatter?.order || 0) - Number(b.frontmatter?.order || 0)
-    )
-  );
+    faqSources = await Promise.all(
+      faqFiles
+        .filter((dirent) => dirent.isFile())
+        .map(async (file) => {
+          const faqFile = await fs.readFile(
+            templateDirectory + "/home/faq/" + file.name,
+            "utf8"
+          );
+
+          return serialize(faqFile, { parseFrontmatter: true });
+        })
+    ).then((x) =>
+      x.sort(
+        (a, b) =>
+          Number(a.frontmatter?.order || 0) - Number(b.frontmatter?.order || 0)
+      )
+    );
+  } catch {
+    //Do Nothing (no FAQ directory)
+  }
 
   if (!contract.image) contract.image = "";
 
