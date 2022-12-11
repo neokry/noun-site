@@ -2,35 +2,33 @@ import { ThemeConfig } from "types/ThemeConfig";
 import { lightTheme, darkTheme } from "theme/default";
 import merge from "lodash.merge";
 
-export const theme: ThemeConfig = merge(lightTheme, {
+export const theme: ThemeConfig = merge(darkTheme, {
   styles: {
     fonts: {
-      heading: "Londrina Solid",
+      heading: "Times New Roman",
+      body: "Times New Roman",
     },
     colors: {
-      "text-highlighted": "0, 133, 255",
+      "text-highlighted": "254, 148, 226",
     },
   },
   brand: {
-    logo: "/builder.svg",
+    logo: "/public.png",
+    title: null,
   },
   nav: {
     primary: [
       { label: "DAO", href: "/vote" },
-      {
-        label: "Docs",
-        href: "https://docs.zora.co/docs/smart-contracts/nouns-builder/intro",
-      },
-      { label: "About", href: "/about" },
+      { label: "Reading", href: "/reading" },
     ],
     secondary: [
-      { label: "Twitter", href: "https://twitter.com/nounsbuilder" },
+      { label: "Forum", href: "https://forum.public---assembly.com/" },
       {
-        label: "Etherscan",
-        href: "https://etherscan.io/address/0xdf9b7d26c8fc806b1ae6273684556761ff02d422",
+        label: "Twitter",
+        href: "https://twitter.com/pblcasmbly",
       },
-      { label: "Zora", href: "https://zora.co/" },
-      { label: "Nouns", href: "https://nouns.wtf/" },
+      { label: "Github", href: "https://github.com/public-assembly" },
+      { label: "Docs", href: "https://docs.public---assembly.com/" },
     ],
   },
 } as Partial<ThemeConfig>);
