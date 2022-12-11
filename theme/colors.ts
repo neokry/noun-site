@@ -37,7 +37,7 @@ export const darkColors: ThemeColors = {
   stroke: withRGB(colors.neutral["700"]),
   backdrop: withRGB(colors.neutral["900"]),
   "text-base": "256, 256, 256",
-  "text-muted": withRGB(colors.neutral["500"]),
+  "text-muted": withRGB(colors.neutral["400"]),
   "text-inverted": "2, 4, 8",
   "text-highlighted": "256, 256, 256",
   "button-accent": "256, 256, 256",
