@@ -26,11 +26,13 @@ export default function Header() {
   const [theme] = useTheme();
   const [showMobile, setShowMobile] = useState(false);
 
+  const onlyTitle = theme.brand.title !== null && theme.brand.logo === null;
+
   return (
     <Fragment>
       <div className="flex items-center justify-between w-full px-6 py-8 xl:w-[1200px]">
         <div className="flex items-center z-20">
-          <Link href={"/"} className="flex items-center">
+          <Link href={"/"} className="flex items-center mr-2 sm:mr-4">
             {theme.brand.logo !== null && contractInfo?.image && (
               <Image
                 src={theme.brand.logo || contractInfo?.image}
@@ -41,7 +43,11 @@ export default function Header() {
               />
             )}
             {theme.brand.title !== null && contractInfo?.name && (
-              <div className="ml-4 text-skin-base font-bold text-xl hidden sm:block">
+              <div
+                className={`ml-4 text-skin-base font-bold text-xl ${
+                  !onlyTitle && "hidden sm:block"
+                } `}
+              >
                 {theme.brand.title || contractInfo?.name}
               </div>
             )}
