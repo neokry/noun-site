@@ -1,3 +1,3 @@
-# Builder DAO
+# Public Assembly
 
-Builder members govern Builder DAO. Builder members can vote on proposals or delegate their vote to a third party.
+Public Assembly members govern the DAO. Public Assembly members can vote on proposals or delegate their vote to a third party.
