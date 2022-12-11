@@ -3,13 +3,8 @@ const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   images: {
+    domains: [process.env.NEXT_PUBLIC_IPFS_GATEWAY.replace("https://", "")],
     remotePatterns: [
-      {
-        protocol: "https",
-        hostname: process.env.NEXT_PUBLIC_IPFS_GATEWAY,
-        port: "",
-        pathname: "/**",
-      },
       {
         protocol: "https",
         hostname: "api.zora.co",

@@ -31,7 +31,7 @@ export default function Header() {
       <div className="flex items-center justify-between w-full px-6 py-8 xl:w-[1200px]">
         <div className="flex items-center z-20">
           <Link href={"/"} className="flex items-center">
-            {contractInfo?.image && (
+            {theme.brand.logo !== null && contractInfo?.image && (
               <Image
                 src={theme.brand.logo || contractInfo?.image}
                 height={90}
