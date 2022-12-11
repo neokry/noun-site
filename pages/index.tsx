@@ -17,7 +17,6 @@ import { promises as fs } from "fs";
 import path from "path";
 import Footer from "@/components/Footer";
 import FaqElement from "@/components/FaqElement";
-import Layout from "@/components/Layout";
 
 export const getStaticProps = async (): Promise<
   GetStaticPropsResult<{
