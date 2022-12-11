@@ -12,6 +12,11 @@ export const theme: ThemeConfig = merge(lightTheme, {
       backdrop: "255, 248, 241",
       fill: "250, 237, 225",
       muted: "247, 240, 233",
+      "proposal-highlighted": "138, 97, 208",
+      "proposal-success": "138, 97, 208",
+      "button-accent": "138, 97, 208",
+      "button-accent-hover": "157, 121, 219",
+      "button-muted": "184, 155, 232",
     },
   },
   brand: {
