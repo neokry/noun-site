@@ -8,29 +8,30 @@ export const theme: ThemeConfig = merge(lightTheme, {
       heading: "Londrina Solid",
     },
     colors: {
-      "text-highlighted": "0, 133, 255",
+      "text-highlighted": "138, 97, 208",
+      backdrop: "255, 248, 241",
+      fill: "250, 237, 225",
+      muted: "247, 240, 233",
     },
   },
   brand: {
-    logo: "/builder.svg",
+    logo: null,
   },
   nav: {
     primary: [
       { label: "DAO", href: "/vote" },
       {
-        label: "Docs",
-        href: "https://docs.zora.co/docs/smart-contracts/nouns-builder/intro",
+        label: "Farcaster",
+        href: "https://fcast.me/purple",
       },
-      { label: "About", href: "/about" },
     ],
     secondary: [
-      { label: "Twitter", href: "https://twitter.com/nounsbuilder" },
+      { label: "Discord", href: "https://discord.gg/58YJDJ5G" },
       {
         label: "Etherscan",
-        href: "https://etherscan.io/address/0xdf9b7d26c8fc806b1ae6273684556761ff02d422",
+        href: "https://etherscan.io/address/0xa45662638e9f3bbb7a6fecb4b17853b7ba0f3a60",
       },
-      { label: "Zora", href: "https://zora.co/" },
-      { label: "Nouns", href: "https://nouns.wtf/" },
+      { label: "Farcaster", href: "https://fcast.me/purple" },
     ],
   },
 } as Partial<ThemeConfig>);

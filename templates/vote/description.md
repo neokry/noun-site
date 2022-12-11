@@ -1,3 +1,3 @@
-# Builder DAO
+# Purple DAO
 
-Builder members govern Builder DAO. Builder members can vote on proposals or delegate their vote to a third party.
+Purple members govern Purple DAO. Purple members can vote on proposals or delegate their vote to a third party.
