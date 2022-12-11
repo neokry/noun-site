@@ -30,6 +30,10 @@ module.exports = {
           muted: withOpacity("--color-text-muted"),
           inverted: withOpacity("--color-text-inverted"),
           highlighted: withOpacity("--color-text-highlighted"),
+          "proposal-success": withOpacity("--color-proposal-success"),
+          "proposal-danger": withOpacity("--color-proposal-danger"),
+          "proposal-muted": withOpacity("--color-proposal-muted"),
+          "proposal-highlighted": withOpacity("--color-proposal-highlighted"),
         },
       },
       backgroundColor: {
@@ -40,6 +44,10 @@ module.exports = {
           "button-accent": withOpacity("--color-button-accent"),
           "button-accent-hover": withOpacity("--color-button-accent-hover"),
           "button-muted": withOpacity("--color-button-muted"),
+          "proposal-success": withOpacity("--color-proposal-success"),
+          "proposal-danger": withOpacity("--color-proposal-danger"),
+          "proposal-muted": withOpacity("--color-proposal-muted"),
+          "proposal-highlighted": withOpacity("--color-proposal-highlighted"),
         },
       },
       borderColor: {

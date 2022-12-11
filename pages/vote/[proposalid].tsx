@@ -232,19 +232,19 @@ const ProgressBar = ({
 
   switch (type) {
     case "success":
-      textColor = "text-green-600";
-      baseColor = "bg-green-600";
-      bgColor = "bg-green-100";
+      textColor = "text-skin-proposal-success";
+      baseColor = "bg-skin-proposal-success";
+      bgColor = "bg-skin-proposal-success bg-opacity-10";
       break;
     case "danger":
-      textColor = "text-red-600";
-      baseColor = "bg-red-600";
-      bgColor = "bg-red-100";
+      textColor = "text-skin-proposal-danger";
+      baseColor = "bg-skin-proposal-danger";
+      bgColor = "bg-skin-proposal-danger bg-opacity-10";
       break;
     case "muted":
-      textColor = "text-gray-500";
-      baseColor = "bg-gray-600";
-      bgColor = "bg-gray-200";
+      textColor = "text-skin-proposal-muted";
+      baseColor = "bg-skin-proposal-muted";
+      bgColor = "bg-skin-proposal-muted bg-opacity-10";
       break;
   }
 

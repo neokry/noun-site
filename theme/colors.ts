@@ -25,6 +25,10 @@ export const lightColors: ThemeColors = {
   "button-accent": withRGB(colors.gray["900"]),
   "button-accent-hover": withRGB(colors.gray["700"]),
   "button-muted": withRGB(colors.gray["300"]),
+  "proposal-success": withRGB(colors.green["600"]),
+  "proposal-danger": withRGB(colors.red["600"]),
+  "proposal-muted": withRGB(colors.neutral["500"]),
+  "proposal-highlighted": withRGB(colors.blue["600"]),
 };
 
 export const darkColors: ThemeColors = {
@@ -39,4 +43,8 @@ export const darkColors: ThemeColors = {
   "button-accent": "256, 256, 256",
   "button-accent-hover": withRGB(colors.slate["200"]),
   "button-muted": withRGB(colors.slate["400"]),
+  "proposal-success": withRGB(colors.green["600"]),
+  "proposal-danger": withRGB(colors.red["600"]),
+  "proposal-muted": withRGB(colors.neutral["500"]),
+  "proposal-highlighted": withRGB(colors.blue["600"]),
 };
