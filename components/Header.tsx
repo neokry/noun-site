@@ -40,9 +40,11 @@ export default function Header() {
                 className="rounded-full"
               />
             )}
-            <div className="ml-4 text-skin-base font-bold text-xl hidden sm:block">
-              {contractInfo?.name}
-            </div>
+            {theme.brand.title !== null && contractInfo?.name && (
+              <div className="ml-4 text-skin-base font-bold text-xl hidden sm:block">
+                {theme.brand.title || contractInfo?.name}
+              </div>
+            )}
           </Link>
 
           <Link
