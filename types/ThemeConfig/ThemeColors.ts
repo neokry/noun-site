@@ -12,4 +12,8 @@ export type ThemeColors = {
   "button-accent"?: RGBType;
   "button-accent-hover"?: RGBType;
   "button-muted"?: RGBType;
+  "proposal-success"?: RGBType;
+  "proposal-danger"?: RGBType;
+  "proposal-muted"?: RGBType;
+  "proposal-highlighted"?: RGBType;
 };
