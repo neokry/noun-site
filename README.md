@@ -72,7 +72,7 @@ We use [frontmatter](https://www.npmjs.com/package/front-matter) to parse templa
 
 ## Theming
 
-Customize your sites colors, branding, navigation and strings via `theme.config.ts`
+Customize your site colors, branding, navigation and strings via `theme.config.ts`
 
 ```javascript
 ThemeConfig = {
@@ -132,7 +132,7 @@ RGBType = `${string}, ${string}, ${string}`
 
 ### Defualt Themes
 
-Quickly started with our two default themes `lightTheme` or `darkTheme`
+Quickly get started with our two default themes `lightTheme` or `darkTheme`
 
 ```javascript
 import { lightTheme } from "theme/default";
