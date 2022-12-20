@@ -1,3 +1,3 @@
-# My DAO Governance
+# Builder DAO
 
-Edit your voting description in the `templates/vote/description.md` file
+Builder members govern Builder DAO. Builder members can vote on proposals or delegate their vote to a third party.
