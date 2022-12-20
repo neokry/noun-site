@@ -1,34 +1,153 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Noun Site
 
-## Getting Started
+A feature complete customizable template for Nouns Builder DAOs built with 
+- [NextJS](https://nextjs.org/) (base framework)
+- [TailwindCSS](https://tailwindcss.com/) (css / theming)
+- [wagmi](https://wagmi.sh/) (writing to contracts)
+- [RainbowKit](https://www.rainbowkit.com/) (wallet connection)
+- [BuilderSDK](https://github.com/neokry/builder-sdk) (reading contract data)
 
-First, run the development server:
+__Demo Sites__
+- [builder.nounsite.wtf](https://builder.nounsite.wtf/)
+- [purple.nounsite.wtf](https://builder.nounsite.wtf/)
+- [assembly.nounsite.wtf](https://builder.nounsite.wtf/)
+
+## Step 1: Create your DAO
+
+Head to the [Nouns Builder](https://nouns.build/) website to deploy your DAO
+
+## Step 2. Clone and deploy with Vercel
+
+Click the '▲ Deploy' button below to clone your own version of the template.
+
+You will be prompted to fill a few variables as part of the deployment process.
+
+### Required Variables
+
+`NEXT_PUBLIC_ALCHEMY_KEY` can be found by creating a new project in [Alchemy](https://dashboard.alchemyapi.io/) and then grabbing the API KEY from the project dashboard page and clicking the 'Get Key' button.
+
+`NEXT_PUBLIC_TOKEN_CONTRACT` can be found on your [Nouns Builder](https://nouns.build/) page
+
+### Optional Variables
+
+`NEXT_PUBLIC_IPFS_GATEWAY` change the default gateway for IPFS content.
+
+`NEXT_PUBLIC_TOKEN_NETWORK` change the network you want to pull token data from set to `5` for Goerli testnet.
+
+### Deploy
+
+Deploy your template using the deploy link below
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fneokry%2Fnoun-site&env=NEXT_PUBLIC_ALCHEMY_KEY,NEXT_PUBLIC_TOKEN_CONTRACT)
+
+
+# Local Development
+
+First, install dependencies with yarn 
 
 ```bash
-npm run dev
-# or
+yarn install
+```
+
+Then, run the development server:
+
+```bash
 yarn dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+## Editing site content
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+You can start editing the markdown templates in `/templates` to change your sites content and add custom pages.
+We use [frontmatter](https://www.npmjs.com/package/front-matter) to parse template configs at the top of each markdown page
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+- `templates/:page.md`: Create simple custom pages by making new markdown files directly in the `templates` folder. 
+  - Set the config `align` to `center` for center aligned content.
+- `templates/home/description.md`: The main description that appears on your site right under the auction hero.
+- `templates/home/faq/:faq-entry.md`: Create new markdown files in the faq folder to add new entries to the FAQ section on the homepage. 
+  - Set the `title` config to change the FAQs title and `order` to change the entries order within the list.
+- `templates/vote/description.md`: The description located at the top of the voting page.
 
-## Learn More
+## Theming
 
-To learn more about Next.js, take a look at the following resources:
+Customize your sites colors, branding, navigation and strings via `theme.config.ts`
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```javascript
+ThemeConfig = {
+  styles: {
+    colors?: ThemeColors;
+    fonts?: ThemeFonts;
+  };
+  strings: {
+    currentBid?: string;
+    auctionEndsIn?: string;
+    placeBid?: string;
+    highestBidder?: string;
+    connectWallet?: string;
+    wrongNetwork?: string;
+  };
+  brand: {
+    logo?: string | null;
+    title?: string | null;
+  };
+  nav: {
+    primary: NavigationItem[];
+    secondary: NavigationItem[];
+  };
+}
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+ThemeColors = {
+  fill?: RGBType;
+  muted?: RGBType;
+  stroke?: RGBType;
+  backdrop?: RGBType;
+  "text-base"?: RGBType;
+  "text-muted"?: RGBType;
+  "text-inverted"?: RGBType;
+  "text-highlighted"?: RGBType;
+  "button-accent"?: RGBType;
+  "button-accent-hover"?: RGBType;
+  "button-muted"?: RGBType;
+  "proposal-success"?: RGBType;
+  "proposal-danger"?: RGBType;
+  "proposal-muted"?: RGBType;
+  "proposal-highlighted"?: RGBType;
+}
 
-## Deploy on Vercel
+ThemeFonts = {
+  heading?: string;
+  body?: string;
+}
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+NavigationItem = {
+  label: string;
+  href: string;
+}
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+RGBType = `${string}, ${string}, ${string}`
+```
+
+
+### Defualt Themes
+Quickly started with our two default themes `lightTheme` or `darkTheme` 
+
+```javascript
+import { lightTheme } from "theme/default";
+
+export const theme: ThemeConfig = merge(lightTheme, {
+  styles: {
+    fonts: {
+      heading: "Roboto",
+    },
+    colors: {
+      "text-highlighted": "0, 133, 255",
+    },
+  },
+  nav: {
+    primary: [
+      { label: "DAO", href: "/vote" },
+    ],
+  },
+} as Partial<ThemeConfig>);
+```
