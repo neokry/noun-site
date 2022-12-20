@@ -18,7 +18,6 @@ export const SettleAuction = ({ auction }: { auction?: string }) => {
     hash: data?.hash,
   });
 
-  console.log("auction", auction);
   const isLoading = contractLoading || transactionLoading;
 
   return (

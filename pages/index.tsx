@@ -110,8 +110,6 @@ export default function SiteComponent({
 
   if (!isMounted) return <Fragment />;
 
-  console.log("faqSources", faqSources);
-
   return (
     <SWRConfig
       value={{

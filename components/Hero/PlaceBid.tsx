@@ -47,7 +47,6 @@ export const PlaceBid = ({
   const getError = () => {
     if (!error?.message) return;
     const message = error?.message;
-    console.log("error", message);
 
     if (message.includes("insufficient funds"))
       return "Error insufficent funds for bid";
@@ -55,8 +54,6 @@ export const PlaceBid = ({
     if (debouncedBid && debouncedBid < utils.formatEther(nextBidAmount))
       return "Error invalid bid";
   };
-
-  console.log("write", write);
 
   return (
     <Fragment>

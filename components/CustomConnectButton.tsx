@@ -18,7 +18,6 @@ const CustomConnectButton = ({ className }: CustomConnectButtonProps) => {
         openConnectModal,
         mounted,
       }) => {
-        console.log("chain", chain);
         return (
           <div
             {...(!mounted && {

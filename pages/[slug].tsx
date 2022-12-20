@@ -33,7 +33,6 @@ export const getStaticProps = async (
     data: MDXRemoteSerializeResult<Record<string, unknown>>;
   }>
 > => {
-  console.log("ctx", ctx);
   const { slug } = ctx.params!;
   const templateDirectory = path.join(process.cwd(), "templates");
   const source = await fs.readFile(`${templateDirectory}/${slug}.md`, "utf8");

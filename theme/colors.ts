@@ -11,7 +11,6 @@ const withRGB = (val: string): `${string}, ${string}, ${string}` => {
 
 const fullConfig = resolveConfig(tailwindConfig);
 const colors = fullConfig.theme!.colors as any;
-console.log("colors", withRGB(colors.gray["900"]));
 
 export const lightColors: ThemeColors = {
   fill: withRGB(colors.gray["100"]),
