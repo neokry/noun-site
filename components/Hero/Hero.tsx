@@ -15,18 +15,22 @@ import { usePreviousAuctions } from "@/hooks/fetch/usePreviousAuctions";
 import { useEnsName } from "wagmi";
 import { shortenAddress } from "@/utils/shortenAddress";
 import UserAvatar from "../UserAvatar";
+import { useRouter } from "next/router";
 
 export default function Hero() {
   const { data: contractInfo } = useContractInfo();
   const { data: auctionInfo } = useCurrentAuctionInfo({
     auctionContract: contractInfo?.auction,
   });
-  const [theme] = useTheme();
-  const [tokenId, setTokenId] = useState<string | undefined>();
+  const { query, push } = useRouter();
 
   const currentTokenId = contractInfo
     ? BigNumber.from(contractInfo.total_supply).sub(1).toHexString()
     : "";
+
+  const tokenId = query.tokenid
+    ? BigNumber.from(query.tokenid as string).toHexString()
+    : currentTokenId;
 
   const { data: tokenInfo } = useTokenInfo({ tokenId });
   const [imageLoaded, setImageLoaded] = useState(false);
@@ -35,20 +39,18 @@ export default function Hero() {
     const bnTokenId = BigNumber.from(tokenId);
     if (bnTokenId.eq(0)) return;
     setImageLoaded(false);
-    setTokenId(bnTokenId.sub(1).toHexString());
+    push(`/token/${bnTokenId.sub(1).toNumber()}`, undefined, {
+      shallow: true,
+    });
   };
 
   const pageForward = () => {
     const bnTokenId = BigNumber.from(tokenId);
     if (bnTokenId.eq(currentTokenId)) return;
-    setTokenId(bnTokenId.add(1).toHexString());
+    push(`/token/${bnTokenId.add(1).toNumber()}`, undefined, {
+      shallow: true,
+    });
   };
-
-  useEffect(() => {
-    if (!tokenId) setTokenId(currentTokenId);
-  }, [tokenId, currentTokenId]);
-
-  console.log("tokenId", tokenId);
 
   return (
     <div className="flex flex-col relative z-20 bg-skin-fill sm:flex-row items-center sm:h-[80vh] sm:max-h-[600px] pt-10">

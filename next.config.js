@@ -13,6 +13,14 @@ const nextConfig = {
       },
     ],
   },
+  async rewrites() {
+    return [
+      {
+        source: "/token/:tokenid",
+        destination: "/?tokenid=:tokenid",
+      },
+    ];
+  },
 };
 
 module.exports = nextConfig;
