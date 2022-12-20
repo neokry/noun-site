@@ -1,9 +1,12 @@
+const IPFS_GATEWAY =
+  process.env.NEXT_PUBLIC_IPFS_GATEWAY || "https://gateway.pinata.cloud";
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   images: {
-    domains: [process.env.NEXT_PUBLIC_IPFS_GATEWAY.replace("https://", "")],
+    domains: [IPFS_GATEWAY.replace("https://", "")],
     remotePatterns: [
       {
         protocol: "https",

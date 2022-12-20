@@ -2,6 +2,7 @@ import { useEnsAvatar } from "wagmi";
 import Image from "next/image";
 import getNormalizedURI from "@/utils/getNormalizedURI";
 import Jazzicon, { jsNumberForAddress } from "react-jazzicon";
+import { IPFS_GATEWAY } from "constants/urls";
 
 export default function UserAvatar({
   address,
@@ -27,7 +28,7 @@ export default function UserAvatar({
     return (
       <Image
         src={getNormalizedURI(ensAvatar, {
-          preferredIPFSGateway: process.env.NEXT_PUBLIC_IPFS_GATEWAY,
+          preferredIPFSGateway: IPFS_GATEWAY,
         })}
         className={className}
         alt="avatar"

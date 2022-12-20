@@ -3,6 +3,7 @@ import DefaultProvider from "@/utils/DefaultProvider";
 import parseBase64String from "@/utils/parseBase64String";
 import getNormalizedURI from "@/utils/getNormalizedURI";
 import { BigNumber } from "ethers";
+import { IPFS_GATEWAY } from "constants/urls";
 
 const { token } = BuilderSDK.connect({ signerOrProvider: DefaultProvider });
 
@@ -43,7 +44,7 @@ export const getContractInfo = async ({ address }: { address: string }) => {
   return {
     ...contractJSON,
     image: getNormalizedURI(contractJSON.image, {
-      preferredIPFSGateway: process.env.NEXT_PUBLIC_IPFS_GATEWAY,
+      preferredIPFSGateway: IPFS_GATEWAY,
     }),
     total_supply: total_supply.toHexString(),
     auction,
