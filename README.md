@@ -135,7 +135,9 @@ RGBType = `${string}, ${string}, ${string}`
 Quickly get started with our two default themes `lightTheme` or `darkTheme`
 
 ```javascript
+import { ThemeConfig } from "types/ThemeConfig";
 import { lightTheme } from "theme/default";
+import merge from "lodash.merge";
 
 export const theme: ThemeConfig = merge(lightTheme, {
   styles: {
