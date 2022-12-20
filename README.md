@@ -1,13 +1,15 @@
 # Noun Site
 
-A feature complete customizable template for Nouns Builder DAOs built with 
+A feature complete customizable template for Nouns Builder DAOs built with
+
 - [NextJS](https://nextjs.org/) (base framework)
 - [TailwindCSS](https://tailwindcss.com/) (css / theming)
 - [wagmi](https://wagmi.sh/) (writing to contracts)
 - [RainbowKit](https://www.rainbowkit.com/) (wallet connection)
 - [BuilderSDK](https://github.com/neokry/builder-sdk) (reading contract data)
 
-__Demo Sites__
+**Demo Sites**
+
 - [builder.nounsite.wtf](https://builder.nounsite.wtf/)
 - [purple.nounsite.wtf](https://builder.nounsite.wtf/)
 - [assembly.nounsite.wtf](https://builder.nounsite.wtf/)
@@ -40,10 +42,9 @@ Deploy your template using the deploy link below
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fneokry%2Fnoun-site&env=NEXT_PUBLIC_ALCHEMY_KEY,NEXT_PUBLIC_TOKEN_CONTRACT)
 
-
 # Local Development
 
-First, install dependencies with yarn 
+First, install dependencies with yarn
 
 ```bash
 yarn install
@@ -62,10 +63,10 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 You can start editing the markdown templates in `/templates` to change your sites content and add custom pages.
 We use [frontmatter](https://www.npmjs.com/package/front-matter) to parse template configs at the top of each markdown page
 
-- `templates/:page.md`: Create simple custom pages by making new markdown files directly in the `templates` folder. 
+- `templates/:page.md`: Create simple custom pages by making new markdown files directly in the `templates` folder.
   - Set the config `align` to `center` for center aligned content.
 - `templates/home/description.md`: The main description that appears on your site right under the auction hero.
-- `templates/home/faq/:faq-entry.md`: Create new markdown files in the faq folder to add new entries to the FAQ section on the homepage. 
+- `templates/home/faq/:faq-entry.md`: Create new markdown files in the faq folder to add new entries to the FAQ section on the homepage.
   - Set the `title` config to change the FAQs title and `order` to change the entries order within the list.
 - `templates/vote/description.md`: The description located at the top of the voting page.
 
@@ -78,6 +79,7 @@ ThemeConfig = {
   styles: {
     colors?: ThemeColors;
     fonts?: ThemeFonts;
+    logoHeight?: string;
   };
   strings: {
     currentBid?: string;
@@ -128,9 +130,9 @@ NavigationItem = {
 RGBType = `${string}, ${string}, ${string}`
 ```
 
-
 ### Defualt Themes
-Quickly started with our two default themes `lightTheme` or `darkTheme` 
+
+Quickly started with our two default themes `lightTheme` or `darkTheme`
 
 ```javascript
 import { lightTheme } from "theme/default";

@@ -129,7 +129,7 @@ export default function SiteComponent({
             <Hero />
           </div>
         </div>
-        <div className="max-w-[1400px]">
+        <div className="max-w-[1400px] w-full">
           <div>
             <div className="bg-skin-backdrop lg:px-24 xl:px-52 mt-8">
               <div className="h-full w-full wrapper focus:outline-none pt-12 p-6 break-words prose prose-skin prose-headings:font-heading lg:prose-xl max-w-none">
