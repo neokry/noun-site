@@ -38,8 +38,9 @@ export default function Header() {
                 src={theme.brand.logo || contractInfo?.image}
                 height={90}
                 width={90}
+                style={{ height: theme.styles.logoHeight }}
                 alt="logo"
-                className="rounded-full"
+                className="rounded-full object-scale-down w-auto"
               />
             )}
             {theme.brand.title !== null && contractInfo?.name && (

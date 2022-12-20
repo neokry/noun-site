@@ -6,6 +6,7 @@ export type ThemeConfig = {
   styles: {
     colors?: ThemeColors;
     fonts?: ThemeFonts;
+    logoHeight?: string;
   };
   strings: {
     currentBid?: string;

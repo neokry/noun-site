@@ -64,7 +64,7 @@ export default function Vote({
       <div className="border border-skin-stroke rounded-2xl py-6 sm:py-0 px-6 mt-6 flex flex-col sm:flex-row sm:items-center justify-between sm:h-32">
         <div className="sm:py-6 h-full">
           <div className="font-heading text-2xl text-skin-muted">Treasury</div>
-          <div className="text-4xl font-heading mt-2 text-skin-base">
+          <div className="text-4xl font-bold font-heading mt-2 text-skin-base">
             Ξ {treasuryBalance ? formatTreasuryBalance(treasuryBalance) : "0"}
           </div>
         </div>
