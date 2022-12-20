@@ -10,6 +10,7 @@ import { useDAOAddresses } from "../hooks";
 import { GovernorABI } from "@buildersdk/sdk";
 import { BigNumber } from "ethers";
 import { useState } from "react";
+import Image from "next/image";
 
 export default function VoteModal({
   proposal,
@@ -33,12 +34,18 @@ export default function VoteModal({
         }
       : undefined
   );
-  const { write, data } = useContractWrite(config);
-  const { data: tx } = useWaitForTransaction(data?.hash);
+  const { write, data, isLoading: writeLoading } = useContractWrite(config);
+  const {
+    data: tx,
+    isLoading: txLoading,
+    isSuccess: txSuccess,
+  } = useWaitForTransaction(data?.hash);
 
   return (
     <div className="text-center text-skin-base pb-4">
-      <div className="font-heading text-4xl">Vote on Prop {proposalNumber}</div>
+      <div className="font-heading text-4xl font-bold">
+        Vote on Prop {proposalNumber}
+      </div>
       <div className="text-skin-muted text-lg mt-2">
         Voting with {balance} NFTs
       </div>
@@ -80,11 +87,17 @@ export default function VoteModal({
         onClick={() => write?.()}
         className={`w-full ${
           write
-            ? "bg-skin-button-accent hover:bg-skin-button-accent-hover text-skin-base"
+            ? "bg-skin-button-accent hover:bg-skin-button-accent-hover text-skin-inverted"
             : "bg-skin-button-muted text-skin-inverted"
-        } rounded-xl py-2 mt-6`}
+        } rounded-xl py-2 mt-6 flex justify-around`}
       >
-        Submit Vote
+        {txSuccess ? (
+          "Vote Submitted 🎉"
+        ) : writeLoading || txLoading ? (
+          <Image src={"/spinner.svg"} alt="spinner" width={20} height={20} />
+        ) : (
+          "Submit Vote"
+        )}
       </button>
     </div>
   );
