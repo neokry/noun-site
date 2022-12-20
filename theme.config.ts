@@ -9,7 +9,10 @@ export const theme: ThemeConfig = merge(lightTheme, {
     },
   },
   nav: {
-    primary: [{ label: "DAO", href: "/vote" }],
+    primary: [
+      { label: "DAO", href: "/vote" },
+      { label: "About", href: "/about" },
+    ],
     secondary: [],
   },
 } as Partial<ThemeConfig>);
