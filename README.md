@@ -44,13 +44,15 @@ Deploy your template using the deploy link below
 
 # Local Development
 
-First, install dependencies with yarn
+Install dependencies with yarn
 
 ```bash
 yarn install
 ```
 
-Then, run the development server:
+Create a `.env.local` file with the two required variables `NEXT_PUBLIC_ALCHEMY_KEY` and `NEXT_PUBLIC_TOKEN_CONTRACT`.
+
+Run the development server:
 
 ```bash
 yarn dev
