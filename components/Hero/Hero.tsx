@@ -24,9 +24,7 @@ export default function Hero() {
   });
   const { query, push } = useRouter();
 
-  const currentTokenId = contractInfo
-    ? BigNumber.from(contractInfo.total_supply).sub(1).toHexString()
-    : "";
+  const currentTokenId = auctionInfo ? auctionInfo?.tokenId : "";
 
   const tokenId = query.tokenid
     ? BigNumber.from(query.tokenid as string).toHexString()

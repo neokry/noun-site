@@ -17,13 +17,14 @@ import { promises as fs } from "fs";
 import path from "path";
 import Footer from "@/components/Footer";
 import FaqElement from "@/components/FaqElement";
+import { getAddresses } from "@/services/nouns-builder/manager";
 
 type MarkdownSource = MDXRemoteSerializeResult<Record<string, unknown>>;
 
 export const getStaticProps = async (): Promise<
   GetStaticPropsResult<{
     tokenContract: string;
-    tokenId: number;
+    tokenId: string;
     contract: ContractInfo;
     token: TokenInfo;
     auction: AuctionInfo;
@@ -32,18 +33,23 @@ export const getStaticProps = async (): Promise<
   }>
 > => {
   // Get token and auction info
-  const tokenContract = process.env.NEXT_PUBLIC_TOKEN_CONTRACT!;
+  const tokenContract = process.env
+    .NEXT_PUBLIC_TOKEN_CONTRACT! as `0x${string}`;
 
-  const contract = await getContractInfo({ address: tokenContract });
+  const addresses = await getAddresses({ tokenAddress: tokenContract });
 
-  const tokenId = parseInt(contract.total_supply) - 1;
-  const [token, auction] = await Promise.all([
-    getTokenInfo({
-      address: tokenContract,
-      tokenid: tokenId.toString(),
-    }),
-    getCurrentAuction({ address: contract.auction }),
+  const [contract, auction] = await Promise.all([
+    getContractInfo({ address: tokenContract }),
+    getCurrentAuction({ address: addresses.auction }),
   ]);
+
+  const tokenId = auction.tokenId;
+  const token = await getTokenInfo({
+    address: tokenContract,
+    tokenid: tokenId,
+  });
+
+  console.log("tokenId", token);
 
   // Get description and faq markdown
 

@@ -2,7 +2,7 @@ import { BuilderSDK } from "@buildersdk/sdk";
 import DefaultProvider from "@/utils/DefaultProvider";
 import parseBase64String from "@/utils/parseBase64String";
 import getNormalizedURI from "@/utils/getNormalizedURI";
-import { BigNumber } from "ethers";
+import { BigNumber, constants } from "ethers";
 import { IPFS_GATEWAY } from "constants/urls";
 
 const { token } = BuilderSDK.connect({ signerOrProvider: DefaultProvider });
@@ -62,11 +62,17 @@ export const getTokenInfo = async ({
     address: address as string,
   });
   const tokenIdBn = BigNumber.from(tokenid);
-  const [tokenURI, owner] = await Promise.all([
+  const [tokenURI, owner] = await Promise.allSettled([
     tokenContract.tokenURI(tokenIdBn),
     tokenContract.ownerOf(tokenIdBn),
   ]);
-  return { ...parseBase64String(tokenURI), owner: owner } as TokenInfo;
+
+  if (tokenURI.status === "rejected") throw new Error("Error token not found");
+
+  return {
+    ...parseBase64String(tokenURI.value),
+    owner: owner.status === "rejected" ? constants.AddressZero : owner?.value,
+  } as TokenInfo;
 };
 
 export const getFounder = async ({
