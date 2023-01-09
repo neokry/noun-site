@@ -51,21 +51,27 @@ export default function Hero() {
   };
 
   return (
-    <div className="flex flex-col relative z-20 bg-skin-fill sm:flex-row items-center sm:h-[80vh] sm:max-h-[600px] pt-10">
-      <div className="sm:w-1/2 mx-4 flex flex-col min-h-[400px] sm:min-h-auto justify-baseline items-end sm:pr-12 h-full relative">
+    <div className="flex flex-col relative z-20 bg-skin-fill sm:flex-row items-top sm:h-[80vh] sm:max-h-[600px] sm:pt-10">
+      <div className="sm:w-1/2 mx-4 flex flex-col min-h-[350px] min-h-auto sm:min-h-auto justify-baseline items-end sm:pr-12 relative">
         {tokenInfo && (
-          <Image
-            src={tokenInfo.image}
-            onLoad={() => setImageLoaded(true)}
-            height={450}
-            width={450}
-            alt="logo"
-            className={`rounded-md relative z-20 ${
-              imageLoaded ? "shadow-lg visible" : "invisible"
-            }`}
-          />
+          <div className="w-full h-auto flex items-center justify-around">
+            <Image
+              src={tokenInfo.image}
+              onLoad={() => setImageLoaded(true)}
+              height={450}
+              width={450}
+              alt="logo"
+              className={`rounded-md relative z-20 object-contain w-max h-[50vh] sm:h-[65vh] sm:max-h-[500px] ${
+                imageLoaded ? "visible" : "invisible"
+              }`}
+            />
+          </div>
         )}
-        <div className="absolute top-0 right-0 w-[450px] h-[450px] hidden sm:flex items-center justify-around sm:pr-12">
+        <div
+          className={`absolute top-0 right-0 w-[450px] h-[450px] hidden sm:flex items-center justify-around sm:pr-12 ${
+            imageLoaded ? "invisible" : "visible"
+          }`}
+        >
           <Image src={"/spinner.svg"} alt="spinner" width={30} height={30} />
         </div>
       </div>
