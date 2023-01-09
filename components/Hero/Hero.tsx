@@ -61,7 +61,7 @@ export default function Hero() {
               height={450}
               width={450}
               alt="logo"
-              className={`rounded-md relative z-20 object-contain w-max h-[50vh] sm:h-[65vh] sm:max-h-[500px] ${
+              className={`rounded-md relative z-20 w-100 h-100 sm:h-[65vh] sm:max-h-[500px] ${
                 imageLoaded ? "visible" : "invisible"
               }`}
             />
