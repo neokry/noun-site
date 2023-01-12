@@ -26,10 +26,9 @@ import Image from "next/image";
 import AuthWrapper from "@/components/AuthWrapper";
 import { useDebounce } from "@/hooks/useDebounce";
 import { useIsMounted } from "@/hooks/useIsMounted";
-import { Fragment, useEffect } from "react";
+import { Fragment } from "react";
 import { useTokenBalance } from "@/hooks/fetch/useTokenBalance";
 import { TOKEN_CONTRACT } from "constants/addresses";
-import { useRouter } from "next/router";
 
 const RichTextEditor = dynamic(() => import("@mantine/rte"), {
   ssr: false,
@@ -49,7 +48,7 @@ export default function Create() {
   return (
     <Layout>
       <div className="flex flex-col items-center">
-        <div className="max-w-[700px] w-full">
+        <div className="max-w-[650px] w-full">
           <div className="flex items-center">
             <Link
               href="/vote"
@@ -58,7 +57,7 @@ export default function Create() {
               <ArrowLeftIcon className="h-4" />
             </Link>
 
-            <div className="text-4xl font-bold relative font-heading text-skin-base">
+            <div className="text-2xl sm:text-4xl font-bold relative font-heading text-skin-base">
               Create your proposal
             </div>
           </div>
@@ -185,9 +184,6 @@ const SubmitButton = () => {
   const { isLoading, isSuccess, status } = useWaitForTransaction({
     hash: data?.hash,
   });
-
-  console.log("isSuccess", isSuccess);
-  console.log("status", status);
 
   const isMounted = useIsMounted();
 
