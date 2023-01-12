@@ -75,7 +75,15 @@ export default function Vote({
       </div>
 
       <div className="mt-12">
-        <div className="text-4xl font-heading text-skin-base">Proposals</div>
+        <div className="flex items-center justify-between">
+          <div className="text-4xl font-heading text-skin-base">Proposals</div>
+          <Link
+            href={"/vote/create"}
+            className="text-sm bg-skin-button-muted w-36 h-8 rounded-lg flex items-center justify-around"
+          >
+            Submit proposal
+          </Link>
+        </div>
         <div>
           {proposals?.map((x, i) => (
             <ProposalPlacard

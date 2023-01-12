@@ -6,7 +6,7 @@ import { compareAddress } from "@/utils/compareAddress";
 import { SettleAuction } from "./SettleAuction";
 import { PlaceBid } from "./PlaceBid";
 import { HighestBidder } from "./HighestBidder";
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, useState } from "react";
 import { useTheme } from "@/hooks/useTheme";
 import { ArrowLeftIcon, ArrowRightIcon } from "@heroicons/react/20/solid";
 import { AuctionInfo } from "@/services/nouns-builder/auction";
