@@ -11,6 +11,8 @@ import { GetStaticPropsResult, InferGetStaticPropsType } from "next";
 import { serialize } from "next-mdx-remote/serialize";
 import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote";
 import { formatTreasuryBalance } from "@/utils/formatTreasuryBalance";
+import { useTokenBalance } from "@/hooks/fetch/useTokenBalance";
+import { Fragment } from "react";
 
 export const getStaticProps = async (): Promise<
   GetStaticPropsResult<{
@@ -45,6 +47,9 @@ export default function Vote({
   const { data: treasuryBalance } = useTreasuryBalance({
     treasuryContract: addresses?.treasury,
   });
+  const { data: userBalance } = useTokenBalance({
+    tokenContract: TOKEN_CONTRACT,
+  });
 
   const getProposalNumber = (i: number) => {
     if (!proposals) return 0;
@@ -77,12 +82,16 @@ export default function Vote({
       <div className="mt-12">
         <div className="flex items-center justify-between">
           <div className="text-4xl font-heading text-skin-base">Proposals</div>
-          <Link
-            href={"/vote/create"}
-            className="text-sm bg-skin-button-muted w-36 h-8 rounded-lg flex items-center justify-around"
-          >
-            Submit proposal
-          </Link>
+          {userBalance && userBalance > 1 ? (
+            <Link
+              href={"/create-proposal"}
+              className="text-sm bg-skin-muted hover:bg-skin-button-accent-hover hover:text-skin-inverted text-skin-muted w-36 h-8 rounded-lg flex items-center justify-around"
+            >
+              Submit proposal
+            </Link>
+          ) : (
+            <Fragment />
+          )}
         </div>
         <div>
           {proposals?.map((x, i) => (

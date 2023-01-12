@@ -13,7 +13,7 @@ import { getProposalDescription } from "@/utils/getProposalDescription";
 import sanitizeHtml from "sanitize-html";
 import ModalWrapper from "@/components/ModalWrapper";
 import VoteModal from "@/components/VoteModal";
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { useTokenBalance } from "@/hooks/fetch/useTokenBalance";
 import { Proposal } from "@/services/nouns-builder/governor";
 
