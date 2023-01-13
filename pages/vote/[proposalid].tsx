@@ -192,10 +192,11 @@ export default function ProposalComponent() {
         Proposed Transactions
       </div>
 
-      <div className="mt-4">
+      <div className="mt-4 max-w-[75vw]">
         {proposal.targets.map((_, index) => (
           <ProposedTransactions
             key={index}
+            index={index}
             target={proposal.targets[index]}
             value={proposal.values[index]}
             calldata={proposal.calldatas[index]}
@@ -214,10 +215,12 @@ type EtherActorResponse = {
 };
 
 const ProposedTransactions = ({
+  index,
   target,
   value,
   calldata,
 }: {
+  index: number;
   target: string;
   value: number;
   calldata: string;
@@ -246,10 +249,10 @@ const ProposedTransactions = ({
   };
 
   return (
-    <div>
-      <div>
+    <div className="w-full">
+      <div className="break-words">
         {linkIfAddress(target)}
-        {`.${data?.functionName || "transfer"}(`}
+        <span>{`.${data?.functionName || "transfer"}(`}</span>
       </div>
       {!data?.decoded && !valueBN.isZero() && (
         <div className="ml-4">{`${ethers.utils.formatEther(valueBN)} ETH`}</div>

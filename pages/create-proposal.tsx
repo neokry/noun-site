@@ -68,7 +68,7 @@ export default function Create() {
 
                 <Field
                   name="title"
-                  placeHolder="My New Proposal"
+                  placeholder="My New Proposal"
                   className="bg-skin-muted text-skin-base placeholder:text-skin-muted px-3 py-3 rounded-lg w-full text-md mt-2 focus:outline-none"
                 />
 
@@ -93,7 +93,7 @@ export default function Create() {
                           </div>
                           <Field
                             name={`transactions[${index}].address`}
-                            placeHolder="0x04bfb0034F24E..."
+                            placeholder="0x04bfb0034F24E..."
                             className="bg-skin-muted text-skin-base placeholder:text-skin-muted px-3 py-3 rounded-lg w-full text-md mt-2 focus:outline-none"
                           />
 
@@ -101,7 +101,7 @@ export default function Create() {
                           <div className="flex items-center mt-2">
                             <Field
                               name={`transactions.${index}.valueInETH`}
-                              placeHolder="0.1"
+                              placeholder="0.1"
                               type="number"
                               className="bg-skin-muted text-skin-base placeholder:text-skin-muted px-3 py-3 rounded-l-lg w-full text-md focus:outline-none"
                             />

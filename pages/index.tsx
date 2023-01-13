@@ -49,8 +49,6 @@ export const getStaticProps = async (): Promise<
     tokenid: tokenId,
   });
 
-  console.log("tokenId", token);
-
   // Get description and faq markdown
 
   const templateDirectory = path.join(process.cwd(), "templates");
