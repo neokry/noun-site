@@ -1,4 +1,13 @@
-export const ZORA_API_ENDPOINT = "https://api.zora.co/graphql";
-export const ETHERSCAN_BASEURL = "https://etherscan.io";
+const ETHERSCAN_BASEURL_BY_NETWORK = {
+  1: "https://etherscan.io",
+  5: "https://goerli.etherscan.io",
+};
+
+export const ETHERSCAN_BASEURL =
+  ETHERSCAN_BASEURL_BY_NETWORK[
+    parseInt(process.env.NEXT_PUBLIC_TOKEN_NETWORK!) as 1 | 5
+  ];
+
+export const ETHER_ACTOR_BASEURL = "https://ether.actor";
 export const IPFS_GATEWAY =
   process.env.NEXT_PUBLIC_IPFS_GATEWAY || "https://gateway.pinata.cloud/ipfs/";

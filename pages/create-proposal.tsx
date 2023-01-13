@@ -29,11 +29,6 @@ import { useIsMounted } from "@/hooks/useIsMounted";
 import { Fragment } from "react";
 import { useTokenBalance } from "@/hooks/fetch/useTokenBalance";
 import { TOKEN_CONTRACT } from "constants/addresses";
-
-const RichTextEditor = dynamic(() => import("@mantine/rte"), {
-  ssr: false,
-  loading: () => null,
-});
 interface Transaction {
   address: string;
   valueInETH: number;
@@ -228,6 +223,13 @@ const HTMLTextEditor = () => {
 
   const { value } = meta;
   const { setValue } = helpers;
+
+  const RichTextEditor = dynamic(() => import("@mantine/rte"), {
+    ssr: false,
+    loading: () => (
+      <div className="mt-2 min-h-[250px] bg-gray-100 rounded-md animate-pulse" />
+    ),
+  });
 
   return (
     <RichTextEditor
