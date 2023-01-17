@@ -32,9 +32,13 @@ You will be prompted to fill a few variables as part of the deployment process.
 
 ### Optional Variables
 
+`NEXT_PUBLIC_TOKEN_NETWORK` change the network you want to pull token data from set to `5` for Goerli testnet.
+
 `NEXT_PUBLIC_IPFS_GATEWAY` change the default gateway for IPFS content.
 
-`NEXT_PUBLIC_TOKEN_NETWORK` change the network you want to pull token data from set to `5` for Goerli testnet.
+### Testnet Deployment
+
+You must set `NEXT_PUBLIC_TOKEN_NETWORK` to `5` for testnet contracts to work.
 
 ### Deploy
 
@@ -155,5 +159,54 @@ export const theme: ThemeConfig = merge(lightTheme, {
       { label: "DAO", href: "/vote" },
     ],
   },
+} as Partial<ThemeConfig>);
+```
+
+## Fonts and branding
+
+To add a new font add an import statement to the top of `styles/globals.css`
+
+```css
+@import url("https://fonts.googleapis.com/css2?family=Londrina+Solid:wght@100;300;400;900&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+```
+
+then set the `styles.fonts` property in `theme.config.ts` to your font
+
+```javascript
+export const theme: ThemeConfig = merge(lightTheme, {
+  styles: {
+    fonts: {
+      heading: "Londrina Solid",
+    },
+  },
+  ...
+} as Partial<ThemeConfig>);
+```
+
+To change your platform logo add your logo to the `public` folder or upload to an image provider like [imgur](https://imgur.com/).
+
+then set the `brand.logo`property in `theme.config.ts` to your logo
+
+```javascript
+export const theme: ThemeConfig = merge(lightTheme, {
+  brand: {
+    logo: "/builder.svg"
+  },
+  ...
+} as Partial<ThemeConfig>);
+```
+
+To remove the logo completely set the `brand.logo`property in `theme.config.ts` to `null`
+
+```javascript
+export const theme: ThemeConfig = merge(lightTheme, {
+  brand: {
+    logo: null
+  },
+  ...
 } as Partial<ThemeConfig>);
 ```
