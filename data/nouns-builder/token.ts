@@ -2,7 +2,7 @@ import { BuilderSDK } from "@buildersdk/sdk";
 import DefaultProvider from "@/utils/DefaultProvider";
 import parseBase64String from "@/utils/parseBase64String";
 import getNormalizedURI from "@/utils/getNormalizedURI";
-import { BigNumber, constants } from "ethers";
+import { BigNumber, BigNumberish, constants } from "ethers";
 import { IPFS_GATEWAY } from "constants/urls";
 
 const { token } = BuilderSDK.connect({ signerOrProvider: DefaultProvider });
@@ -104,4 +104,22 @@ export const getBalanceOf = async ({
   });
 
   return await tokenContract.balanceOf(user);
+};
+
+export const getUserVotes = async ({
+  address,
+  user,
+  timestamp,
+}: {
+  address: `0x${string}`;
+  user: `0x${string}`;
+  timestamp?: string;
+}) => {
+  const tokenContract = token({
+    address,
+  });
+
+  return timestamp
+    ? tokenContract.getPastVotes(user, BigNumber.from(timestamp))
+    : tokenContract.getVotes(user);
 };

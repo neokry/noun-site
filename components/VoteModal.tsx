@@ -1,4 +1,3 @@
-import { useTokenBalance } from "@/hooks/fetch/useTokenBalance";
 import { Proposal } from "@/services/nouns-builder/governor";
 import { TOKEN_CONTRACT } from "constants/addresses";
 import {
@@ -11,21 +10,27 @@ import { GovernorABI } from "@buildersdk/sdk";
 import { BigNumber } from "ethers";
 import { useState } from "react";
 import Image from "next/image";
+import { useUserVotes } from "@/hooks/fetch/useUserVotes";
+import { XMarkIcon } from "@heroicons/react/20/solid";
 
 export default function VoteModal({
   proposal,
   proposalNumber,
+  setOpen,
 }: {
   proposal: Proposal;
   proposalNumber: number;
+  setOpen: (value: boolean) => void;
 }) {
-  const { data: balance } = useTokenBalance({ tokenContract: TOKEN_CONTRACT });
+  const { data: userVotes } = useUserVotes({
+    timestamp: proposal.proposal.timeCreated,
+  });
   const { data: addresses } = useDAOAddresses({
     tokenContract: TOKEN_CONTRACT,
   });
   const [support, setSupport] = useState<0 | 1 | 2 | undefined>();
   const { config } = usePrepareContractWrite(
-    support
+    support !== undefined
       ? {
           address: addresses?.governor,
           abi: GovernorABI,
@@ -35,19 +40,22 @@ export default function VoteModal({
       : undefined
   );
   const { write, data, isLoading: writeLoading } = useContractWrite(config);
-  const {
-    data: tx,
-    isLoading: txLoading,
-    isSuccess: txSuccess,
-  } = useWaitForTransaction(data?.hash);
+  const { isLoading: txLoading, isSuccess: txSuccess } = useWaitForTransaction({
+    hash: data?.hash,
+  });
 
   return (
-    <div className="text-center text-skin-base pb-4">
+    <div className="text-center text-skin-base pb-4 relative">
+      <div className="absolute top-0 right-0">
+        <button type="button" onClick={() => setOpen(false)}>
+          <XMarkIcon className="h-6" />
+        </button>
+      </div>
       <div className="font-heading text-4xl font-bold">
         Vote on Prop {proposalNumber}
       </div>
       <div className="text-skin-muted text-lg mt-2">
-        Voting with {balance} NFTs
+        Voting with {userVotes} NFTs
       </div>
 
       <button
@@ -85,6 +93,7 @@ export default function VoteModal({
 
       <button
         onClick={() => write?.()}
+        disabled={txLoading || txSuccess}
         className={`w-full ${
           write
             ? "bg-skin-button-accent hover:bg-skin-button-accent-hover text-skin-inverted"

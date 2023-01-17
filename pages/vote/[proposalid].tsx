@@ -14,11 +14,11 @@ import sanitizeHtml from "sanitize-html";
 import ModalWrapper from "@/components/ModalWrapper";
 import VoteModal from "@/components/VoteModal";
 import { Fragment, useState } from "react";
-import { useTokenBalance } from "@/hooks/fetch/useTokenBalance";
 import { Proposal } from "@/services/nouns-builder/governor";
 import useSWR from "swr";
 import { ETHERSCAN_BASEURL, ETHER_ACTOR_BASEURL } from "constants/urls";
 import { BigNumber, ethers } from "ethers";
+import { useUserVotes } from "@/hooks/fetch/useUserVotes";
 
 export default function ProposalComponent() {
   const { data: addresses } = useDAOAddresses({
@@ -37,7 +37,6 @@ export default function ProposalComponent() {
     : 0;
 
   const proposal = proposals?.find((x) => x.proposalId === proposalid);
-  const isActive = proposal?.state === 1;
 
   const { data: ensName } = useEnsName({
     address: proposal?.proposal.proposer,
@@ -196,7 +195,6 @@ export default function ProposalComponent() {
         {proposal.targets.map((_, index) => (
           <ProposedTransactions
             key={index}
-            index={index}
             target={proposal.targets[index]}
             value={proposal.values[index]}
             calldata={proposal.calldatas[index]}
@@ -215,12 +213,10 @@ type EtherActorResponse = {
 };
 
 const ProposedTransactions = ({
-  index,
   target,
   value,
   calldata,
 }: {
-  index: number;
   target: string;
   value: number;
   calldata: string;
@@ -275,12 +271,11 @@ const VoteButton = ({
   proposalNumber: number;
 }) => {
   const [modalOpen, setModalOpen] = useState(false);
-  const { data: userBalance } = useTokenBalance({
-    tokenContract: TOKEN_CONTRACT,
+  const { data: userVotes } = useUserVotes({
+    timestamp: proposal.proposal.timeCreated,
   });
 
-  if (proposal.state !== 1 || !userBalance || userBalance < 1)
-    return <Fragment />;
+  if (proposal.state !== 1 || !userVotes || userVotes < 1) return <Fragment />;
 
   return (
     <Fragment>
@@ -289,7 +284,11 @@ const VoteButton = ({
         open={modalOpen}
         setOpen={setModalOpen}
       >
-        <VoteModal proposal={proposal} proposalNumber={proposalNumber} />
+        <VoteModal
+          proposal={proposal}
+          proposalNumber={proposalNumber}
+          setOpen={setModalOpen}
+        />
       </ModalWrapper>
       <button
         className="bg-skin-button-accent text-skin-inverted rounded-xl px-4 py-3 font-semibold w-full sm:w-auto mt-8 sm:mt-0"

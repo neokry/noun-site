@@ -1,5 +1,6 @@
 import { BuilderSDK } from "@buildersdk/sdk";
 import DefaultProvider from "@/utils/DefaultProvider";
+import { BigNumber } from "ethers";
 
 const { governor } = BuilderSDK.connect({ signerOrProvider: DefaultProvider });
 
@@ -27,6 +28,26 @@ export type ProposalDetails = {
   executed: boolean;
   canceled: boolean;
   vetoed: boolean;
+};
+
+export const getUserVotes = async ({
+  address,
+  user,
+  timestamp,
+}: {
+  address: string;
+  user: `0x${string}`;
+  timestamp: number;
+}) => {
+  return governor({ address }).getVotes(user, BigNumber.from(timestamp));
+};
+
+export const getProposalThreshold = async ({
+  address,
+}: {
+  address: string;
+}) => {
+  return governor({ address }).proposalThreshold();
 };
 
 export const getProposalState = async ({

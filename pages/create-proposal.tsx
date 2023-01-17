@@ -27,8 +27,9 @@ import AuthWrapper from "@/components/AuthWrapper";
 import { useDebounce } from "@/hooks/useDebounce";
 import { useIsMounted } from "@/hooks/useIsMounted";
 import { Fragment } from "react";
-import { useTokenBalance } from "@/hooks/fetch/useTokenBalance";
 import { TOKEN_CONTRACT } from "constants/addresses";
+import { useUserVotes } from "@/hooks/fetch/useUserVotes";
+import { useCurrentThreshold } from "@/hooks/fetch/useCurrentThreshold";
 interface Transaction {
   address: string;
   valueInETH: number;
@@ -150,8 +151,13 @@ export default function Create() {
 const SubmitButton = () => {
   const { values: formValues } = useFormikContext<Values>();
   const { transactions, title, summary } = formValues || {};
-  const { data: userBalance } = useTokenBalance({
+  const { data: addresses } = useDAOAddresses({
     tokenContract: TOKEN_CONTRACT,
+  });
+
+  const { data: userVotes } = useUserVotes();
+  const { data: currentThreshold } = useCurrentThreshold({
+    governorContract: addresses?.governor,
   });
 
   const targets = transactions?.map((t) => t.address as `0x${string}`) || [];
@@ -163,10 +169,6 @@ const SubmitButton = () => {
 
   const args = [targets, values, callDatas, description] as const;
   const debouncedArgs = useDebounce(args);
-
-  const { data: addresses } = useDAOAddresses({
-    tokenContract: process.env.NEXT_PUBLIC_TOKEN_CONTRACT,
-  });
 
   const { config } = usePrepareContractWrite({
     address: addresses?.governor,
@@ -184,7 +186,7 @@ const SubmitButton = () => {
 
   if (!isMounted) return <Fragment />;
 
-  const hasBalance = userBalance && userBalance > 0;
+  const hasBalance = userVotes && userVotes >= (currentThreshold || 0);
 
   const buttonClass = `${
     write
