@@ -150,8 +150,8 @@ const EndedAuction = ({
   });
 
   return (
-    <div className="grid grid-cols-2 gap-0 sm:gap-12 mt-10 sm:w-96 pb-8 sm:pb-0">
-      <div className="border-r mr-8 sm:mr-0 border-skin-stroke">
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-12 mt-10 sm:w-96 pb-8 sm:pb-0">
+      <div className="lg:border-r mr-8 sm:mr-0 border-skin-stroke">
         <div className="text-lg text-skin-muted">{"Winning Bid"}</div>
         {auctionData ? (
           <div className="text-2xl font-semibold sm:text-3xl text-skin-base mt-2">
