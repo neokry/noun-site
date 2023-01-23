@@ -5,7 +5,7 @@ const ETHERSCAN_BASEURL_BY_NETWORK = {
 
 export const ETHERSCAN_BASEURL =
   ETHERSCAN_BASEURL_BY_NETWORK[
-    parseInt(process.env.NEXT_PUBLIC_TOKEN_NETWORK!) as 1 | 5
+    parseInt(process.env.NEXT_PUBLIC_TOKEN_NETWORK ?? "1") as 1 | 5
   ];
 
 export const ETHER_ACTOR_BASEURL = "https://ether.actor";
