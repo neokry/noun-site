@@ -219,19 +219,19 @@ const SubmitButton = () => {
   );
 };
 
+const RichTextEditor = dynamic(() => import("@mantine/rte"), {
+  ssr: false,
+  loading: () => (
+    <div className="mt-2 min-h-[250px] bg-gray-100 rounded-md animate-pulse" />
+  ),
+});
+
 const HTMLTextEditor = () => {
   const props = { name: "summary", type: "text", id: "summary" };
   const [_, meta, helpers] = useField(props.name);
 
   const { value } = meta;
   const { setValue } = helpers;
-
-  const RichTextEditor = dynamic(() => import("@mantine/rte"), {
-    ssr: false,
-    loading: () => (
-      <div className="mt-2 min-h-[250px] bg-gray-100 rounded-md animate-pulse" />
-    ),
-  });
 
   return (
     <RichTextEditor
