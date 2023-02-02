@@ -205,7 +205,7 @@ const CurrentAuction = ({
             </div>
           )}
         </div>
-        <div className="sm:w-64">
+        <div>
           <div className="text-lg text-skin-muted">
             {theme.strings.auctionEndsIn || "Auction ends in"}
           </div>
