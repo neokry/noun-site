@@ -51,8 +51,8 @@ export default function Hero() {
   };
 
   return (
-    <div className="flex flex-col relative z-20 bg-skin-fill sm:flex-row items-top sm:h-[80vh] sm:max-h-[600px] sm:pt-10">
-      <div className="sm:w-1/2 mx-4 flex flex-col min-h-[350px] min-h-auto sm:min-h-auto justify-baseline items-end sm:pr-12 relative">
+    <div className="flex flex-col relative z-20 bg-skin-fill lg:flex-row items-top lg:h-[80vh] lg:max-h-[600px] lg:pt-10">
+      <div className="lg:w-1/2 mx-4 flex flex-col min-h-[350px] min-h-auto lg:min-h-auto justify-baseline items-end lg:pr-12 relative">
         {tokenInfo && (
           <div className="w-full h-auto flex items-center justify-around">
             <Image
@@ -61,21 +61,21 @@ export default function Hero() {
               height={450}
               width={450}
               alt="logo"
-              className={`rounded-md relative z-20 w-100 h-100 sm:h-[65vh] sm:max-h-[500px] ${
+              className={`rounded-md relative z-20 w-100 h-100 lg:h-[65vh] lg:max-h-[500px] ${
                 imageLoaded ? "visible" : "invisible"
               }`}
             />
           </div>
         )}
         <div
-          className={`absolute top-0 right-0 w-[450px] h-[450px] hidden sm:flex items-center justify-around sm:pr-12 ${
+          className={`absolute top-0 right-0 w-[450px] h-[450px] hidden lg:flex items-center justify-around lg:pr-12 ${
             imageLoaded ? "invisible" : "visible"
           }`}
         >
           <Image src={"/spinner.svg"} alt="spinner" width={30} height={30} />
         </div>
       </div>
-      <div className="px-4 w-screen sm:w-auto min-h-64 sm:h-full flex flex-col justify-stretch items-stretch mt-6 sm:mt-0">
+      <div className="px-4 w-screen lg:w-auto min-h-64 lg:h-full flex flex-col justify-stretch items-stretch mt-6 lg:mt-0">
         <div className="flex items-center mb-4">
           <button
             onClick={pageBack}
@@ -150,8 +150,8 @@ const EndedAuction = ({
   });
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-12 mt-10 sm:w-96 pb-8 sm:pb-0">
-      <div className="lg:border-r mr-8 sm:mr-0 border-skin-stroke">
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-12 mt-10 lg:w-96 pb-8 lg:pb-0">
+      <div className="lg:border-r mr-8 lg:mr-0 border-skin-stroke">
         <div className="text-lg text-skin-muted">{"Winning Bid"}</div>
         {auctionData ? (
           <div className="text-2xl font-semibold sm:text-3xl text-skin-base mt-2">
@@ -163,7 +163,7 @@ const EndedAuction = ({
           </div>
         )}
       </div>
-      <div className="sm:w-64">
+      <div className="lg:w-64">
         <div className="text-lg text-skin-muted">{"Held by"}</div>
 
         <div className="flex items-center mt-2">
@@ -194,7 +194,7 @@ const CurrentAuction = ({
 
   return (
     <Fragment>
-      <div className="grid grid-cols-2 gap-12 mt-10 sm:w-96">
+      <div className="grid grid-cols-2 gap-12 mt-10 lg:w-96">
         <div className="border-r border-skin-stroke">
           <div className="text-lg text-skin-muted">
             {theme.strings.currentBid || "Current Bid"}
@@ -205,7 +205,7 @@ const CurrentAuction = ({
             </div>
           )}
         </div>
-        <div className="sm:w-64">
+        <div className="lg:w-64">
           <div className="text-lg text-skin-muted">
             {theme.strings.auctionEndsIn || "Auction ends in"}
           </div>
