@@ -125,7 +125,7 @@ export default function SiteComponent({
       }}
     >
       <div className="bg-skin-backdrop text-skin-base min-h-screen flex flex-col items-center justify-around">
-        <div className="bg-skin-fill w-full flex items-center justify-around">
+        <div className="bg-skin-fill w-full flex items-center justify-around pb-8 lg:pb-0">
           <div className="max-w-[1400px]">
             <Header />
             <Hero />
