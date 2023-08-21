@@ -10,7 +10,6 @@ import { ArrowLeftIcon } from "@heroicons/react/20/solid";
 import { useEnsName } from "wagmi";
 import { shortenAddress } from "@/utils/shortenAddress";
 import { getProposalDescription } from "@/utils/getProposalDescription";
-import sanitizeHtml from "sanitize-html";
 import ModalWrapper from "@/components/ModalWrapper";
 import VoteModal from "@/components/VoteModal";
 import { Fragment, useState } from "react";
@@ -19,6 +18,10 @@ import useSWR from "swr";
 import { ETHERSCAN_BASEURL, ETHER_ACTOR_BASEURL } from "constants/urls";
 import { BigNumber, ethers } from "ethers";
 import { useUserVotes } from "@/hooks/fetch/useUserVotes";
+import ReactMarkdown from "react-markdown";
+import rehypeRaw from "rehype-raw";
+import rehypeSanitize from "rehype-sanitize";
+import remarkGfm from "remark-gfm";
 
 export default function ProposalComponent() {
   const { data: addresses } = useDAOAddresses({
@@ -177,14 +180,13 @@ export default function ProposalComponent() {
           Description
         </div>
 
-        <div
+        <ReactMarkdown
           className="prose prose-skin mt-4 prose-img:w-auto break-words max-w-[90vw] sm:max-w-[1000px]"
-          dangerouslySetInnerHTML={{
-            __html: sanitizeHtml(getProposalDescription(proposal.description), {
-              allowedTags: sanitizeHtml.defaults.allowedTags.concat(["img"]),
-            }),
-          }}
-        />
+          rehypePlugins={[rehypeRaw, rehypeSanitize]}
+          remarkPlugins={[remarkGfm]}
+        >
+          {getProposalDescription(proposal.description)}
+        </ReactMarkdown>
       </div>
 
       <div className="text-2xl font-heading text-skin-base mt-8 font-bold">
