@@ -6,6 +6,7 @@ import {
   useContractWrite,
   useWaitForTransaction,
   useAccount,
+  Address,
 } from "wagmi";
 import { AuctionABI } from "@buildersdk/sdk";
 import { useDebounce } from "@/hooks/useDebounce";
@@ -26,7 +27,7 @@ export const PlaceBid = ({
   const [theme] = useTheme();
 
   const { config, error } = usePrepareContractWrite({
-    address: auction,
+    address: auction as Address,
     abi: AuctionABI,
     functionName: "createBid",
     args: [BigNumber.from(tokenId || 1)],

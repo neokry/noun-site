@@ -7,8 +7,6 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     address: address as string,
   });
 
-  console.log("data", data, address);
-
   res.status(200).send(data.toNumber());
 };
 

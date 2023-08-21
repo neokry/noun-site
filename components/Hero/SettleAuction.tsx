@@ -3,12 +3,13 @@ import {
   usePrepareContractWrite,
   useContractWrite,
   useWaitForTransaction,
+  Address,
 } from "wagmi";
 import { AuctionABI } from "@buildersdk/sdk";
 
 export const SettleAuction = ({ auction }: { auction?: string }) => {
   const { config } = usePrepareContractWrite({
-    address: auction,
+    address: auction as Address,
     abi: AuctionABI,
     functionName: "settleCurrentAndCreateNewAuction",
     enabled: !!auction,

@@ -53,9 +53,6 @@ export default function Vote({
     governorContract: addresses?.governor,
   });
 
-  console.log("userVotes", userVotes);
-  console.log("currentThreshold", currentThreshold);
-
   const getProposalNumber = (i: number) => {
     if (!proposals) return 0;
     return proposals.length - i;
