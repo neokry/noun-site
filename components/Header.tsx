@@ -40,7 +40,7 @@ export default function Header() {
                 width={90}
                 style={{ height: theme.styles.logoHeight }}
                 alt="logo"
-                className="rounded-full object-scale-down w-auto"
+                className="object-scale-down w-auto"
               />
             )}
             {theme.brand.title !== null && contractInfo?.name && (
